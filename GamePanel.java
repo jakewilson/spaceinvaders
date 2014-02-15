@@ -19,7 +19,7 @@ public class GamePanel extends JPanel {
   
   public GamePanel() {
     super();
-    hero = new Ship(Color.ORANGE, 300, 300);
+    hero = new Ship(Color.ORANGE);
     this.setBackground(Color.BLACK);
     this.setFocusable(true);
     this.addKeyListener(new ShipListener(hero));

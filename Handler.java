@@ -13,6 +13,9 @@ public class Handler {
   private static GamePanel gamePanel;
   private static JFrame    gameFrame;
   
+  public static final int frameWidth  = 600;
+  public static final int frameHeight = 600;
+  
   public static void main(String[] args) {
     loadGame();
     runGame();
@@ -30,7 +33,7 @@ public class Handler {
   private static void loadGame() {
     gamePanel = new GamePanel();
     gameFrame = new JFrame("Space Invaders");
-    gameFrame.setSize(600, 600);
+    gameFrame.setSize(frameWidth, frameHeight);
     gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     gameFrame.setLocationRelativeTo(null);
     gameFrame.add(gamePanel);
