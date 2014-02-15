@@ -19,7 +19,7 @@ public class GamePanel extends JPanel {
   
   public GamePanel() {
     super();
-    hero = new Ship(Color.ORANGE);
+    hero = new Ship(new Color(255, 154, 0)); // make the ship orange
     this.setBackground(Color.BLACK);
     this.setFocusable(true);
     this.addKeyListener(new ShipListener(hero));
@@ -50,10 +50,17 @@ class ShipListener implements KeyListener {
   
   // moves the ship  
   public void keyPressed(KeyEvent ke) {
-    if (ke.getExtendedKeyCode() == KeyEvent.VK_RIGHT) { // right arrow key
+    switch (ke.getExtendedKeyCode()) {
+    case KeyEvent.VK_RIGHT: // move the ship to the right
       ship.move(ship.DIRECTION_RIGHT);
-    } else if (ke.getExtendedKeyCode() == KeyEvent.VK_LEFT) { // left arrow key
+      break;
+    case KeyEvent.VK_LEFT: // move the ship to the left
       ship.move(ship.DIRECTION_LEFT);
+      break;
+    case KeyEvent.VK_SPACE:
+      System.out.println("Fire!!");
+      ship.fireLaser();
+      break;
     }
   }
 
