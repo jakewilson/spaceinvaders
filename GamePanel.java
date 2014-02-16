@@ -15,11 +15,15 @@ import javax.swing.JPanel;
  */
 public class GamePanel extends JPanel {
   
-  private Ship hero;
+  private Ship    hero;
+  private Enemy[] wave;
   
   public GamePanel() {
     super();
     hero = new Ship(new Color(255, 154, 0)); // make the ship orange
+    wave = new Enemy[40];
+    for (int i = 0; i < wave.length; i++)
+      wave[i] = new Enemy(Color.GREEN, 30 + (50 * i), 30 + (i / 11 * 50));
     this.setBackground(Color.BLACK);
     this.setFocusable(true);
     this.addKeyListener(new ShipListener(hero));
@@ -28,6 +32,8 @@ public class GamePanel extends JPanel {
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     hero.draw(g);
+    for (int i = 0; i < wave.length; i++)
+      wave[i].draw(g);
   }
 
 }
@@ -58,7 +64,6 @@ class ShipListener implements KeyListener {
       ship.move(ship.DIRECTION_LEFT);
       break;
     case KeyEvent.VK_SPACE:
-      System.out.println("Fire!!");
       ship.fireLaser();
       break;
     }

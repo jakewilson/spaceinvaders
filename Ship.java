@@ -46,18 +46,17 @@ public class Ship {
     Polygon p = new Polygon(xPoints, yPoints, 3);
     g.fillPolygon(p);
     g.drawPolygon(p);
-    if (shotFired) {
+    if (shotFired) { // if a shot has been fired, draw it on the screen
       g.setColor(Color.RED);
       g.drawLine(laserX, laserY, laserX, laserY - 20);
-      laserY -= 1;
-      if (laserY < 0) shotFired = false;
-      System.out.println(laserY);
+      laserY -= 3; // move the laser up the screen
+      if (laserY < 0) shotFired = false; // if the laser is off the screen, stop moving it
     }
   }
   
   // moves the ship left or right as long as the ship is within bounds
   public void move(int direction) {
-    if (rightX + direction < Handler.frameWidth - 30 && leftX + direction > 10) {
+    if (rightX + direction < Handler.FRAME_WIDTH - 30 && leftX + direction > 10) {
       leftX += direction;
       assignVertices();
     }
