@@ -16,14 +16,12 @@ import javax.swing.JPanel;
 public class GamePanel extends JPanel {
   
   private Ship    hero;
-  private Enemy[] wave;
+  private Wave wave;
   
   public GamePanel() {
     super();
     hero = new Ship(new Color(255, 154, 0)); // make the ship orange
-    wave = new Enemy[40];
-    for (int i = 0; i < wave.length; i++)
-      wave[i] = new Enemy(Color.GREEN, 30 + (50 * i), 30 + (i / 11 * 50));
+    wave = new Wave(22); // TODO: the size should be a variable depending on the leve
     this.setBackground(Color.BLACK);
     this.setFocusable(true);
     this.addKeyListener(new ShipListener(hero));
@@ -32,8 +30,15 @@ public class GamePanel extends JPanel {
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     hero.draw(g);
-    for (int i = 0; i < wave.length; i++)
-      wave[i].draw(g);
+    wave.draw(g);
+  }
+  
+  public Wave getWave() {
+    return wave;
+  }
+  
+  public Ship getHero() {
+    return hero;
   }
 
 }

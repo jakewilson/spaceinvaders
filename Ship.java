@@ -20,7 +20,7 @@ public class Ship {
   
   private int laserX, laserY; // the coordinates of the start of the laser
   
-  private boolean shotFired; // whether the user has fired a shot
+  private boolean shotFired;  // whether the user has fired a shot
   
   public final int DIRECTION_RIGHT = 7;
   public final int DIRECTION_LEFT  = -7;
@@ -35,6 +35,11 @@ public class Ship {
   
   public Ship(Color c) {
     color = c;
+    this.goToStartingPoint();
+  }
+  
+  public Ship() {
+    color = Color.ORANGE;
     this.goToStartingPoint();
   }
   
