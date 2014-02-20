@@ -30,6 +30,7 @@ public class Ship {
     leftX     = x;
     leftY     = y;
     shotFired = false;
+    laser     = new Laser(Color.RED, topX, topY, 20);
     assignVertices();
   }
   
@@ -39,8 +40,10 @@ public class Ship {
    * @param c - the color of the ship
    */
   public Ship(Color c) {
-    color = c;
     this.goToStartingPoint();
+    color     = c;
+    shotFired = false;
+    laser     = new Laser(Color.RED, topX, topY, 20);
   }
   
   /**
@@ -48,8 +51,10 @@ public class Ship {
    * bottom of the screen
    */
   public Ship() {
-    color = Color.ORANGE;
     this.goToStartingPoint();
+    color     = Color.ORANGE;
+    shotFired = false;
+    laser     = new Laser(Color.RED, topX, topY, 20);
   }
   
   /**
@@ -88,7 +93,8 @@ public class Ship {
    * Fires a laser from the top of the ship by creating a new Laser()
    */
   public void fireLaser() {
-    laser     = new Laser(Color.RED, topX, topY, 20); // garbage collection will handle the previous laser
+    if (laser.isOffScreen()) // allow only one shot to be fired at a time
+      laser.setLocation(topX, topY);
     shotFired = true;
   }
   

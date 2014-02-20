@@ -22,6 +22,7 @@ public class Laser {
     length = len;
   }
   
+  
   /**
    * Draws the laser and decrements the y value, so everytime the laser is drawn it is
    * higher than the last time it was drawn
@@ -39,6 +40,16 @@ public class Laser {
    */
   public boolean isOffScreen() {
     return origY < 0;
+  }
+  
+  /**
+   * Sets the location of the laser
+   * @param x - the new x value of the laser
+   * @param y - the new y value of the laser
+   */
+  public void setLocation(int x, int y) {
+    origX = x;
+    origY = y;
   }
 
 }
