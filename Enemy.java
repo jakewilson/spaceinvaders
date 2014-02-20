@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 /**
  * Enemy.java
+ * The 
  *
  * @author  Jake
  * @version Feb 15, 2014
@@ -23,6 +24,12 @@ public class Enemy {
     centerY = y;
   }
   
+  public Enemy(int x, int y) {
+    color   = Color.GREEN;
+    centerX = x;
+    centerY = y;
+  }
+  
   /**
    * Draws an enemy on the screen
    * @param g - The graphics context to draw on
@@ -33,7 +40,7 @@ public class Enemy {
   }
   
   public void move(int direction) {
-    
+    // TODO: add functionality here
   }
   
 }

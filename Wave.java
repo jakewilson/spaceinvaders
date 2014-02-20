@@ -4,7 +4,7 @@ import java.awt.Graphics;
 
 /**
  * Wave.java
- * The 'wave' of approaching enemies.
+ * The 'wave' of approaching enemies: contains an array of enemy objects.
  *
  * @author  Jake
  * @version Feb 16, 2014

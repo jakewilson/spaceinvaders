@@ -4,7 +4,7 @@ import java.awt.Graphics;
 
 /**
  * Laser.java
- * Laser projectile used by the ship
+ * Laser projectile used by the ship.
  *
  * @author  Jake
  * @version Feb 20, 2014

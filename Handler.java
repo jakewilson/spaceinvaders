@@ -26,7 +26,7 @@ public class Handler {
    */
   private static void runGame() {
     gameFrame.setVisible(true);
-    while (true) {
+    while (true) { // game loop
       gamePanel.repaint(); // redraw the screen
     }
   }

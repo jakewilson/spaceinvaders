@@ -76,6 +76,7 @@ public class Ship {
   
   /**
    * Moves the ship right of left. If the param is not DIRECTION_RIGHT or DIRECTION_LEFT
+   * the ship will not move. If moving will cause the ship to move off of the screen,
    * the ship will not move.
    * @param direction - DIRECTION_LEFT or DIRECTION_RIGHT
    */
