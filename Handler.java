@@ -21,6 +21,9 @@ public class Handler {
     runGame();
   }
   
+  /**
+   * Runs the main game loop
+   */
   private static void runGame() {
     gameFrame.setVisible(true);
     while (true) {
@@ -29,7 +32,9 @@ public class Handler {
   }
   
   
-  // initializes game objects
+  /**
+   * Initializes game objects
+   */
   private static void loadGame() {
     gamePanel = new GamePanel();
     gameFrame = new JFrame("Space Invaders");

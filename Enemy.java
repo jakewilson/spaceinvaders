@@ -23,6 +23,10 @@ public class Enemy {
     centerY = y;
   }
   
+  /**
+   * Draws an enemy on the screen
+   * @param g - The graphics context to draw on
+   */
   public void draw(Graphics g) {
     g.setColor(color);
     g.fillOval(centerX, centerY, 20, 20);

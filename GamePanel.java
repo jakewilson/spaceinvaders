@@ -15,8 +15,8 @@ import javax.swing.JPanel;
  */
 public class GamePanel extends JPanel {
   
-  private Ship    hero;
-  private Wave wave;
+  private Ship hero; // the ship the user will play as
+  private Wave wave; // the wave of enemies the user will fight
   
   public GamePanel() {
     super();
@@ -33,10 +33,16 @@ public class GamePanel extends JPanel {
     wave.draw(g);
   }
   
+  /**
+   * @return the Wave of enemies
+   */
   public Wave getWave() {
     return wave;
   }
   
+  /**
+   * @return the ship (hero)
+   */
   public Ship getHero() {
     return hero;
   }
@@ -58,8 +64,7 @@ class ShipListener implements KeyListener {
   public void keyTyped(KeyEvent e) {
     
   }
-  
-  // moves the ship  
+
   public void keyPressed(KeyEvent ke) {
     switch (ke.getExtendedKeyCode()) {
     case KeyEvent.VK_RIGHT: // move the ship to the right

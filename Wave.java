@@ -21,6 +21,10 @@ public class Wave {
     }
   }
   
+  /**
+   * Draws the entire array of enemies
+   * @param g - The graphics context to draw on
+   */
   public void draw(Graphics g) {
     for (int i = 0; i < wave.length; i++)
       wave[i].draw(g);
