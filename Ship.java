@@ -75,7 +75,7 @@ public class Ship {
    * @param direction - DIRECTION_LEFT or DIRECTION_RIGHT
    */
   public void move(int direction) {
-    if (direction != DIRECTION_LEFT || direction != DIRECTION_RIGHT)
+    if (direction != DIRECTION_LEFT && direction != DIRECTION_RIGHT)
       return;
     
     if (rightX + direction < Handler.FRAME_WIDTH - 30 && leftX + direction > 10) {
@@ -88,7 +88,7 @@ public class Ship {
    * Fires a laser from the top of the ship by creating a new Laser()
    */
   public void fireLaser() {
-    laser     = new Laser(Color.RED, topX, topY, 20);
+    laser     = new Laser(Color.RED, topX, topY, 20); // garbage collection will handle the previous laser
     shotFired = true;
   }
   
