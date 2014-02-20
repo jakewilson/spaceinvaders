@@ -4,7 +4,7 @@ import java.awt.Graphics;
 
 /**
  * Enemy.java
- * The 
+ * The enemy that the ship is fighting
  *
  * @author  Jake
  * @version Feb 15, 2014
