@@ -30,6 +30,12 @@ public class Handler {
     gameFrame.setVisible(true);
     while (true) { // game loop
       gamePanel.repaint(); // redraw the screen
+      Ship hero = gamePanel.getHero();
+      Wave wave = gamePanel.getWave();
+      int len = wave.length();
+      for (int i = 0; i < len; i++) {
+        
+      }
     }
   }
   

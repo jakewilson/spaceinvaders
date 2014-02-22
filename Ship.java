@@ -101,6 +101,13 @@ public class Ship implements GameObject {
   }
   
   /**
+   * @return the ships laser (no matter it's location)
+   */
+  public Laser getLaser() {
+    return laser;
+  }
+  
+  /**
    * Returns the ship to it's origin (middle of the bottom of the screen)
    */
   public void goToStartingPoint() {
