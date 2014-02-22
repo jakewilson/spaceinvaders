@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 import javax.swing.JFrame;
 
 
@@ -37,9 +39,12 @@ public class Handler {
       // check if the laser has collided with an enemy
       for (int i = 0; i < wave.length(); i++) {
         // if the laser has hit an enemy
-        if (detectCollision(laser, wave.getEnemyAt(i))) {
-          System.out.println("Collision!" + Math.random());
+        Enemy e = wave.getEnemyAt(i);
+        if (detectCollision(laser, e)) {
+          System.out.printf("Laser tip: (%d, %d)\n", laser.getTipX(), laser.getTipY());
+          System.out.printf("Enemy center: (%d, %d) r: %d\n", e.getCenterX(), e.getCenterY(), e.getRadius());
         }
+        e.changeColor(Color.GREEN);
       }
       
     }
@@ -50,7 +55,7 @@ public class Handler {
    * Initializes game objects
    */
   private static void loadGame() {
-    gamePanel = new GamePanel();
+    gamePanel = new GamePanel(true);
     gameFrame = new JFrame("Space Invaders");
     gameFrame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
     gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,8 +73,10 @@ public class Handler {
     if ((e.getCenterY() + e.getRadius() >= l.getTipY()) &&
         (e.getCenterY() - e.getRadius() <= l.getTipY()) &&
         (e.getCenterX() + e.getRadius() >= l.getTipX()) &&
-        (e.getCenterX() - e.getRadius() <= l.getTipX()))
+        (e.getCenterX() - e.getRadius() <= l.getTipX())) {
+      e.changeColor(Color.BLUE);
       return true;
+    }
     
     return false;
   }

@@ -36,7 +36,7 @@ public class Enemy implements GameObject {
    */
   public void draw(Graphics g) {
     g.setColor(color);
-    g.fillOval(centerX, centerY, 20, 20);
+    g.fillOval(centerX, centerY, radius, radius);
   }
   
   /**
@@ -66,6 +66,10 @@ public class Enemy implements GameObject {
    */
   public void move(int direction) {
     // TODO: add functionality here
+  }
+  
+  public void changeColor(Color c) {
+    color = c;
   }
   
 }
