@@ -76,7 +76,7 @@ public class Ship implements GameObject {
   }
   
   /**
-   * Moves the ship right of left. If the param is not DIRECTION_RIGHT or DIRECTION_LEFT
+   * Moves the ship right or left. If the param is not DIRECTION_RIGHT or DIRECTION_LEFT
    * the ship will not move. If moving will cause the ship to move off of the screen,
    * the ship will not move.
    * @param direction - DIRECTION_LEFT or DIRECTION_RIGHT
@@ -108,7 +108,7 @@ public class Ship implements GameObject {
   }
   
   /**
-   * Returns the ship to it's origin (middle of the bottom of the screen)
+   * Sets the ships coordinates to it's origin (middle of the bottom of the screen)
    */
   public void goToStartingPoint() {
     leftX = (Handler.FRAME_WIDTH / 2) - 10;

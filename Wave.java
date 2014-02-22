@@ -15,10 +15,10 @@ public class Wave {
   private ArrayList<Enemy> wave;
   
   public Wave(int n) {
-    wave = new ArrayList<Enemy>();
+    wave = new ArrayList<Enemy>(n);
     // draw the enemies in rows of 11
-    for (int i = 0; i < wave.size(); i++) {
-      wave.add(new Enemy(Color.GREEN, 30 + (50 * (i % 11)), 30 + (i / 11 * 50)));
+    for (int i = 0; i < n; i++) {
+      wave.add(i, (new Enemy(Color.GREEN, 30 + (50 * (i % 11)), 30 + (i / 11 * 50))));
     }
   }
   
@@ -39,12 +39,11 @@ public class Wave {
   }
   
   /**
-   * Returns the enemy at the specified index.
-   * Returns null if the index is out of bounds.
+   * Returns the enemy at the specified index or null if the index is out of bounds.
    * @param index - the index of the enemy array
    * @return the enemy at index or null if index is out of bounds
    */
-  public Enemy getWaveAt(int index) {
+  public Enemy getEnemyAt(int index) {
     if (index >= 0 && index < wave.size())
       return wave.get(index);
     

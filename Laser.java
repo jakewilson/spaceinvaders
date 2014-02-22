@@ -22,6 +22,14 @@ public class Laser implements GameObject {
     length = len;
   }
   
+  public Laser(int x, int y, int len) {
+    this(Color.RED, x, y, len);
+  }
+  
+  public Laser(int x, int y) {
+    this(Color.RED, x, y, 20);
+  }
+  
   
   /**
    * Draws the laser and decrements the y value, so everytime the laser is drawn it is
@@ -30,7 +38,7 @@ public class Laser implements GameObject {
    */
   public void draw(Graphics g) {
     g.setColor(color);
-    g.drawLine(origX, origY, origX, origY - length);
+    g.drawLine(origX, origY, getTipX(), getTipY());
     origY--; // move the laser vertically up the screen
   }
   
@@ -40,6 +48,27 @@ public class Laser implements GameObject {
    */
   public boolean isOffScreen() {
     return origY < 0;
+  }
+  
+  /**
+   * @return the y value of the lasers tip (origY - len)
+   */
+  public int getTipY() {
+    return origY - length;
+  }
+  
+  /**
+   * @return the x value of the lasers tip (same as origX)
+   */
+  public int getTipX() {
+    return origX;
+  }
+  
+  /**
+   * @return the length of the laser
+   */
+  public int getLength() {
+    return length;
   }
   
   /**

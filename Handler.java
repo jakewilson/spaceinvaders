@@ -30,12 +30,18 @@ public class Handler {
     gameFrame.setVisible(true);
     while (true) { // game loop
       gamePanel.repaint(); // redraw the screen
-      Ship hero = gamePanel.getHero();
-      Wave wave = gamePanel.getWave();
-      int len = wave.length();
-      for (int i = 0; i < len; i++) {
-        
+      Ship hero   = gamePanel.getHero();
+      Wave wave   = gamePanel.getWave();
+      Laser laser = hero.getLaser();
+      
+      // check if the laser has collided with an enemy
+      for (int i = 0; i < wave.length(); i++) {
+        // if the laser has hit an enemy
+        if (detectCollision(laser, wave.getEnemyAt(i))) {
+          System.out.println("Collision!" + Math.random());
+        }
       }
+      
     }
   }
   
@@ -53,13 +59,19 @@ public class Handler {
   }
   
   /**
-   * Detects collisions between two game objects.
-   * @param x - the first game object
-   * @param y - the second game object
+   * Detects collisions between a laser and an enemy
+   * @param l - the laser
+   * @param e - the enemy
    * @return whether they've collided
    */
-  private static boolean detectCollision(GameObject x, GameObject y) {
-    return true;
+  private static boolean detectCollision(Laser l, Enemy e) {
+    if ((e.getCenterY() + e.getRadius() >= l.getTipY()) &&
+        (e.getCenterY() - e.getRadius() <= l.getTipY()) &&
+        (e.getCenterX() + e.getRadius() >= l.getTipX()) &&
+        (e.getCenterX() - e.getRadius() <= l.getTipX()))
+      return true;
+    
+    return false;
   }
 
 }
