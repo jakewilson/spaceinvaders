@@ -10,7 +10,7 @@ import java.awt.Polygon;
  * @author  Jake
  * @version Feb 15, 2014
  */
-public class Ship {
+public class Ship implements GameObject {
   
   private Color color;
   
@@ -70,7 +70,8 @@ public class Ship {
     g.drawPolygon(p);
     if (shotFired) { // if a shot has been fired, draw it on the screen
       laser.draw(g);
-      if (laser.isOffScreen()) shotFired = false; // if the laser is off the screen, stop moving it
+      if (laser.isOffScreen())
+        shotFired = false; // if the laser is off the screen, stop moving it
     }
   }
   

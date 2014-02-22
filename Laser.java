@@ -9,7 +9,7 @@ import java.awt.Graphics;
  * @author  Jake
  * @version Feb 20, 2014
  */
-public class Laser {
+public class Laser implements GameObject {
   
   Color color;
   int   origX, origY;

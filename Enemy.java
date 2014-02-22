@@ -9,7 +9,7 @@ import java.awt.Graphics;
  * @author  Jake
  * @version Feb 15, 2014
  */
-public class Enemy {
+public class Enemy implements GameObject {
   
   private Color color;
   private int centerX, centerY;

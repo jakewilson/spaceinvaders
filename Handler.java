@@ -3,7 +3,9 @@ import javax.swing.JFrame;
 
 /**
  * Handler.java
- * This class is responsible for drawing the window and adding the game panel.
+ * This class is responsible for upper-level game mechanisms.
+ * Handler draws the game window, adds the panel, runs the game loop,
+ * and detects collisions between game objects.
  *
  * @author  Jake
  * @version Feb 15, 2014
@@ -42,6 +44,16 @@ public class Handler {
     gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     gameFrame.setLocationRelativeTo(null);
     gameFrame.add(gamePanel);
+  }
+  
+  /**
+   * Detects collisions between two game objects.
+   * @param x - the first game object
+   * @param y - the second game object
+   * @return whether they've collided
+   */
+  private static boolean detectCollision(GameObject x, GameObject y) {
+    return true;
   }
 
 }

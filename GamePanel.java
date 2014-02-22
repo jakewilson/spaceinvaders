@@ -61,8 +61,8 @@ class ShipListener implements KeyListener {
   }
 
   @Override
-  public void keyTyped(KeyEvent e) {
-    
+  public void keyTyped(KeyEvent ke) {
+
   }
 
   public void keyPressed(KeyEvent ke) {
