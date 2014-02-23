@@ -49,5 +49,14 @@ public class Wave {
     
     return null;
   }
+  
+  /**
+   * Removes an enemy at the specified index from the ArrayList
+   * @param index - the index at which to remove an enemy
+   */
+  public void removeEnemyAt(int index) {
+    if (index >= 0 && index < wave.size())
+      wave.remove(index);
+  }
 
 }

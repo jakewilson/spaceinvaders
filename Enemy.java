@@ -23,7 +23,7 @@ public class Enemy implements GameObject {
     color   = c;
     centerX = x;
     centerY = y;
-    radius  = 20;
+    radius  = 10;
   }
   
   public Enemy(int x, int y) {
@@ -36,7 +36,7 @@ public class Enemy implements GameObject {
    */
   public void draw(Graphics g) {
     g.setColor(color);
-    g.fillOval(centerX, centerY, radius, radius);
+    g.fillOval(centerX-radius, centerY-radius, radius*2, radius*2);
   }
   
   /**

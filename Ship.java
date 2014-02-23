@@ -22,8 +22,8 @@ public class Ship implements GameObject {
   
   private Laser laser; // the ships laser
   
-  public final int DIRECTION_RIGHT = 7;
-  public final int DIRECTION_LEFT  = -7;
+  public final int DIRECTION_RIGHT = 5;
+  public final int DIRECTION_LEFT  = -5;
   
   public Ship(Color c, int x, int y) {
     color     = c;
@@ -124,6 +124,14 @@ public class Ship implements GameObject {
     rightY  = leftY;
     topX    = leftX + 10;
     topY    = rightY - 20;
+  }
+  
+  /**
+   * Notify the ship that it's laser has collided, so there's no need to draw it anymore
+   */
+  public void laserHasCollided() {
+    laser.setLocation(topX, topY);
+    shotFired = false;
   }
 
 }
