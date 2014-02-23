@@ -22,17 +22,8 @@ public class Ship implements GameObject {
   
   private Laser laser; // the ships laser
   
-  public final int DIRECTION_RIGHT = 5;
-  public final int DIRECTION_LEFT  = -5;
-  
-  public Ship(Color c, int x, int y) {
-    color     = c;
-    leftX     = x;
-    leftY     = y;
-    shotFired = false;
-    laser     = new Laser(Color.RED, topX, topY, 20);
-    assignVertices();
-  }
+  public final int DIRECTION_RIGHT = 7;
+  public final int DIRECTION_LEFT  = -7;
   
   /**
    * Constructor that sets the ships color to c and sets the ship to the middle of the
@@ -40,10 +31,11 @@ public class Ship implements GameObject {
    * @param c - the color of the ship
    */
   public Ship(Color c) {
-    this.goToStartingPoint();
     color     = c;
     shotFired = false;
     laser     = new Laser(Color.RED, topX, topY, 20);
+    laser.moveOffScreen();
+    this.goToStartingPoint();
   }
   
   /**
@@ -51,10 +43,7 @@ public class Ship implements GameObject {
    * bottom of the screen
    */
   public Ship() {
-    this.goToStartingPoint();
-    color     = Color.ORANGE;
-    shotFired = false;
-    laser     = new Laser(Color.RED, topX, topY, 20);
+    this(Color.ORANGE);
   }
   
   /**
@@ -89,6 +78,7 @@ public class Ship implements GameObject {
       leftX += direction;
       assignVertices();
     }
+    laser.setLocation(topX, topY);
   }
   
   /**
@@ -127,9 +117,9 @@ public class Ship implements GameObject {
   }
   
   /**
-   * Notify the ship that it's laser has collided, so there's no need to draw it anymore
+   * Return the laser to the top of the ship and stop drawing it
    */
-  public void laserHasCollided() {
+  public void returnLaser() {
     laser.setLocation(topX, topY);
     shotFired = false;
   }

@@ -51,6 +51,13 @@ public class Laser implements GameObject {
   }
   
   /**
+   * Moves the laser off the screen
+   */
+  public void moveOffScreen() {
+    this.setLocation(-50, -50);
+  }
+  
+  /**
    * @return the y value of the lasers tip (origY - len)
    */
   public int getTipY() {

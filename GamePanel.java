@@ -84,7 +84,7 @@ class ShipListener implements KeyListener {
 
   @Override
   public void keyTyped(KeyEvent ke) {
-
+    
   }
 
   public void keyPressed(KeyEvent ke) {
@@ -102,8 +102,8 @@ class ShipListener implements KeyListener {
   }
 
   @Override
-  public void keyReleased(KeyEvent e) {
-
+  public void keyReleased(KeyEvent ke) {
+    
   }
   
 }

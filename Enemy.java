@@ -36,6 +36,8 @@ public class Enemy implements GameObject {
    */
   public void draw(Graphics g) {
     g.setColor(color);
+    // TODO: change this to top left coordinates and use width and height to draw
+    //       and adjust collision detection in Handler accordingly
     g.fillOval(centerX-radius, centerY-radius, radius*2, radius*2);
   }
   

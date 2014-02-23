@@ -18,8 +18,10 @@ public class Handler {
   private static JFrame    gameFrame;
   
   public static final int FRAME_WIDTH  = 600;
-  public static final int FRAME_HEIGHT = 600;
+  public static final int FRAME_HEIGHT = 400;
   
+  // TODO: change this to be not constant. Allow it to be triggered
+  //       by a certain password typed or button combination
   public static final boolean DEBUG = false;
   
   public static void main(String[] args) {
@@ -48,7 +50,7 @@ public class Handler {
             System.out.printf("Enemy center: (%d, %d) r: %d\n", e.getCenterX(), e.getCenterY(), e.getRadius());
           }
           wave.removeEnemyAt(i);
-          hero.laserHasCollided();
+          hero.returnLaser();
         }
         e.changeColor(Color.GREEN);
       }
