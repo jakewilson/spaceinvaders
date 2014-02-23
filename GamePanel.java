@@ -46,7 +46,8 @@ public class GamePanel extends JPanel {
     while (i < Handler.FRAME_WIDTH) {
       g.setFont(new Font("Monospace", Font.PLAIN, 9));
       g.setColor(Color.RED);
-      g.drawString(i+"", i-2, 15);
+      g.drawString(i+"", i+2, 15);
+      g.drawString(i+"", 5, i-2);
       g.setColor(Color.GRAY);
       g.drawLine(i, 0, i, Handler.FRAME_HEIGHT);
       g.drawLine(0, i, Handler.FRAME_WIDTH, i);

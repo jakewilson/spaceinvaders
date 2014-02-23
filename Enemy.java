@@ -68,6 +68,10 @@ public class Enemy implements GameObject {
     // TODO: add functionality here
   }
   
+  /**
+   * Changes the color of an enemy
+   * @param c - the new color
+   */
   public void changeColor(Color c) {
     color = c;
   }
