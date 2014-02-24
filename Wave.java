@@ -58,5 +58,20 @@ public class Wave {
     if (index >= 0 && index < wave.size())
       wave.remove(index);
   }
+  
+  /**
+   * Moves the entire wave of ships forward
+   * 
+   * TODO: implement some sort of static direction variable to keep track of
+   *       which direction we're moving in between method calls. We need to move
+   *       the enemies in the right direction first. Then, when one of them enemies
+   *       reaches the wall, the wave moves down ONCE, then moves to the left, and 
+   *       continues in this fashion.
+   */
+  public void advance() {
+    for (int i = 0; i < length(); i++) {
+      wave.get(i).move(Enemy.DIRECTION_RIGHT);
+    }
+  }
 
 }

@@ -20,6 +20,12 @@ public class Handler {
   public static final int FRAME_WIDTH  = 600;
   public static final int FRAME_HEIGHT = 400;
   
+  // approximate sizes of borders. The borders of the windows prevent the panel from being the same
+  // size as the FRAME_WIDTH and FRAME_HEIGHT, so we have to add the size of the borders to ensure
+  // FRAME_WIDTH and FRAME_HEIGHT are the same as the panel's.
+  public static final int BORDER_WIDTH  = 18;
+  public static final int BORDER_HEIGHT = 38;
+  
   public static void main(String[] args) {
     loadGame();
     runGame();
@@ -30,11 +36,21 @@ public class Handler {
    */
   private static void runGame() {
     gameFrame.setVisible(true);
+    int counter = 0; // loop counter
     while (true) { // game loop
       gamePanel.repaint(); // redraw the screen
       Ship hero   = gamePanel.getHero();
       Wave wave   = gamePanel.getWave();
       Laser laser = hero.getLaser();
+      
+      // TODO: the '5000000' needs to be a variable dependent on how many enemies
+      //       are left on the screen. The less enemies are left, the faster they move,
+      //       which means the counter should have less and less value
+      if (!gamePanel.isPaused()) { // only move the enemies if the game is not paused
+        if (counter++ % 5000000 == 0)
+          wave.advance();
+      }
+      
       
       // check if the laser has collided with an enemy
       for (int i = 0; i < wave.length(); i++) {
@@ -43,12 +59,11 @@ public class Handler {
         if (detectCollision(laser, e)) {
           if (gamePanel.getDebugMode()) {
             System.out.printf("Laser tip: (%d, %d)\n", laser.getTipX(), laser.getTipY());
-            System.out.printf("Enemy center: (%d, %d) r: %d\n", e.getCornerX(), e.getCornerY(), e.getLength());
+            System.out.printf("Enemy corner: (%d, %d) l: %d\n", e.getCornerX(), e.getCornerY(), e.getLength());
           }
           wave.removeEnemyAt(i);
           hero.returnLaser();
         }
-        e.changeColor(Color.GREEN);
       }
       
     }
@@ -61,7 +76,7 @@ public class Handler {
   private static void loadGame() {
     gamePanel = new GamePanel();
     gameFrame = new JFrame("Space Invaders");
-    gameFrame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+    gameFrame.setSize(FRAME_WIDTH + BORDER_WIDTH, FRAME_HEIGHT + BORDER_HEIGHT);
     gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     gameFrame.setLocationRelativeTo(null);
     gameFrame.add(gamePanel);

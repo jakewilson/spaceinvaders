@@ -15,9 +15,9 @@ public class Enemy implements GameObject {
   private int cornerX, cornerY; // coordinates of the top left corner of the enemy
   private int length;
   
-  public static final int DIRECTION_DOWN  = 1;
-  public static final int DIRECTION_LEFT  = -1;
-  public static final int DIRECTION_RIGHT = 1;
+  public static final int DIRECTION_DOWN  = 0;
+  public static final int DIRECTION_LEFT  = 1;
+  public static final int DIRECTION_RIGHT = 2;
 
   public Enemy(Color c, int x, int y) {
     color   = c;
@@ -65,7 +65,22 @@ public class Enemy implements GameObject {
    * @param direction - the direction in which to move
    */
   public void move(int direction) {
-    
+    switch (direction) {
+    case DIRECTION_RIGHT:
+      if ((cornerX + length) + 1 < Handler.FRAME_WIDTH)
+        cornerX += direction;
+      break;
+    case DIRECTION_LEFT:
+      if (cornerX - 1 > 0)
+        cornerX--;
+      break;
+    case DIRECTION_DOWN:
+      if ((cornerY + length) + 1 < Handler.FRAME_HEIGHT)
+        cornerY++;
+      break;
+    default: // invalid direction
+      break;
+    }
   }
   
   /**

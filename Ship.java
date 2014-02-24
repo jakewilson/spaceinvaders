@@ -102,7 +102,7 @@ public class Ship implements GameObject {
    */
   public void goToStartingPoint() {
     leftX = (Handler.FRAME_WIDTH / 2) - 10;
-    leftY = Handler.FRAME_HEIGHT - 50;
+    leftY = Handler.FRAME_HEIGHT - 30;
     assignVertices();
   }
   
