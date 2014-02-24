@@ -53,14 +53,14 @@ public class GamePanel extends JPanel {
    */
   private void displayPauseMenu(Graphics g) {
     String debugString = "";
-    g.drawString("Game Paused", Handler.FRAME_WIDTH / 2 - 50, Handler.FRAME_HEIGHT / 2);
-    g.drawString("[p] To Unpause", Handler.FRAME_WIDTH / 2 - 30, Handler.FRAME_HEIGHT / 2);
+    g.drawString("Game Paused", Handler.FRAME_WIDTH / 2, Handler.FRAME_HEIGHT / 2 - 60);
+    g.drawString("[p] To Unpause", Handler.FRAME_WIDTH / 2, Handler.FRAME_HEIGHT / 2 - 40);
     if (debugMode) {
       debugString = "[d] To Leave Debug Mode";
     } else {
       debugString = "[d] To Enter Debug Mode";
     }
-    g.drawString(debugString, Handler.FRAME_WIDTH / 2 - 10, Handler.FRAME_HEIGHT / 2);
+    g.drawString(debugString, Handler.FRAME_WIDTH / 2, Handler.FRAME_HEIGHT / 2 - 20);
   }
   
   /**
@@ -146,19 +146,25 @@ class ShipListener implements KeyListener {
   public void keyPressed(KeyEvent ke) {
     switch (ke.getExtendedKeyCode()) {
     case KeyEvent.VK_RIGHT: // move the ship to the right
-      ship.move(ship.DIRECTION_RIGHT);
+      if (!panel.isPaused()) {
+        ship.move(ship.DIRECTION_RIGHT);
+      }
       break;
     case KeyEvent.VK_LEFT: // move the ship to the left
-      ship.move(ship.DIRECTION_LEFT);
+      if (!panel.isPaused()) {
+        ship.move(ship.DIRECTION_LEFT);
+      }
       break;
-    case KeyEvent.VK_SPACE:
-      ship.fireLaser();
+    case KeyEvent.VK_SPACE: // fire the laser
+      if (!panel.isPaused()) {
+        ship.fireLaser();
+      }
       break;
-    case KeyEvent.VK_P:
+    case KeyEvent.VK_P:  // pause the game
       panel.togglePause();
       break;
     case KeyEvent.VK_D:
-      if (panel.isPaused()) {
+      if (panel.isPaused()) { // enter debug mode
         panel.toggleDebugMode();
       }
     }

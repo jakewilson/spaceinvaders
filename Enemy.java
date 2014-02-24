@@ -65,7 +65,7 @@ public class Enemy implements GameObject {
    * @param direction - the direction in which to move
    */
   public void move(int direction) {
-    // TODO: add functionality here
+    
   }
   
   /**
