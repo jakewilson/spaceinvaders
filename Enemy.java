@@ -12,8 +12,8 @@ import java.awt.Graphics;
 public class Enemy implements GameObject {
   
   private Color color;
-  private int centerX, centerY;
-  private int radius;
+  private int cornerX, cornerY; // coordinates of the top left corner of the enemy
+  private int length;
   
   public static final int DIRECTION_DOWN  = 1;
   public static final int DIRECTION_LEFT  = -1;
@@ -21,9 +21,9 @@ public class Enemy implements GameObject {
 
   public Enemy(Color c, int x, int y) {
     color   = c;
-    centerX = x;
-    centerY = y;
-    radius  = 10;
+    cornerX = x;
+    cornerY = y;
+    length  = 20;
   }
   
   public Enemy(int x, int y) {
@@ -38,28 +38,28 @@ public class Enemy implements GameObject {
     g.setColor(color);
     // TODO: change this to top left coordinates and use width and height to draw
     //       and adjust collision detection in Handler accordingly
-    g.fillOval(centerX-radius, centerY-radius, radius*2, radius*2);
+    g.fillOval(cornerX, cornerY, length, length);
   }
   
   /**
-   * @return the radius of the enemy
+   * @return the side length of the enemy
    */
-  public int getRadius() {
-    return radius;
+  public int getLength() {
+    return length;
   }
   
   /**
-   * @return the x coordinate of the enemy's center
+   * @return the x coordinate of the enemy's top left corner
    */
-  public int getCenterX() {
-    return centerX;
+  public int getCornerX() {
+    return cornerX;
   }
   
   /**
-   * @return the y coordinate of the enemy's center
+   * @return the y coordinate of the enemy's top left corner
    */
-  public int getCenterY() {
-    return centerY;
+  public int getCornerY() {
+    return cornerY;
   }
   
   /**

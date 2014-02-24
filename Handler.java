@@ -22,7 +22,7 @@ public class Handler {
   
   // TODO: change this to be not constant. Allow it to be triggered
   //       by a certain password typed or button combination
-  public static final boolean DEBUG = false;
+  public static final boolean DEBUG = true;
   
   public static void main(String[] args) {
     loadGame();
@@ -47,7 +47,7 @@ public class Handler {
         if (detectCollision(laser, e)) {
           if (DEBUG) {
             System.out.printf("Laser tip: (%d, %d)\n", laser.getTipX(), laser.getTipY());
-            System.out.printf("Enemy center: (%d, %d) r: %d\n", e.getCenterX(), e.getCenterY(), e.getRadius());
+            System.out.printf("Enemy center: (%d, %d) r: %d\n", e.getCornerX(), e.getCornerY(), e.getLength());
           }
           wave.removeEnemyAt(i);
           hero.returnLaser();
@@ -78,10 +78,9 @@ public class Handler {
    * @return whether they've collided
    */
   private static boolean detectCollision(Laser l, Enemy e) {
-    if ((e.getCenterY() + e.getRadius() >= l.getTipY()) &&
-        (e.getCenterY() - e.getRadius() <= l.getTipY()) &&
-        (e.getCenterX() + e.getRadius() >= l.getTipX()) &&
-        (e.getCenterX() - e.getRadius() <= l.getTipX())) {
+    int x = e.getCornerX(), y = e.getCornerY(), len = e.getLength();
+    if ((x <= l.getTipX() && x + len >= l.getTipX()) &&
+        (y <= l.getTipY() && y + len >= l.getTipY())) {
       if (DEBUG) e.changeColor(Color.BLUE);
       return true;
     }
