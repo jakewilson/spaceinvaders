@@ -20,10 +20,6 @@ public class Handler {
   public static final int FRAME_WIDTH  = 600;
   public static final int FRAME_HEIGHT = 400;
   
-  // TODO: change this to be not constant. Allow it to be triggered
-  //       by a certain password typed or button combination
-  public static final boolean DEBUG = true;
-  
   public static void main(String[] args) {
     loadGame();
     runGame();
@@ -45,7 +41,7 @@ public class Handler {
         // if the laser has hit an enemy
         Enemy e = wave.getEnemyAt(i);
         if (detectCollision(laser, e)) {
-          if (DEBUG) {
+          if (gamePanel.getDebugMode()) {
             System.out.printf("Laser tip: (%d, %d)\n", laser.getTipX(), laser.getTipY());
             System.out.printf("Enemy center: (%d, %d) r: %d\n", e.getCornerX(), e.getCornerY(), e.getLength());
           }
@@ -63,7 +59,7 @@ public class Handler {
    * Initializes game objects
    */
   private static void loadGame() {
-    gamePanel = new GamePanel(DEBUG);
+    gamePanel = new GamePanel();
     gameFrame = new JFrame("Space Invaders");
     gameFrame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
     gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -81,7 +77,7 @@ public class Handler {
     int x = e.getCornerX(), y = e.getCornerY(), len = e.getLength();
     if ((x <= l.getTipX() && x + len >= l.getTipX()) &&
         (y <= l.getTipY() && y + len >= l.getTipY())) {
-      if (DEBUG) e.changeColor(Color.BLUE);
+      if (gamePanel.getDebugMode()) e.changeColor(Color.BLUE);
       return true;
     }
     

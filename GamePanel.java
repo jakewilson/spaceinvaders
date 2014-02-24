@@ -3,6 +3,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.BitSet;
 
 import javax.swing.JPanel;
 
@@ -20,22 +21,46 @@ public class GamePanel extends JPanel {
   private Wave wave; // the wave of enemies the user will fight
   
   private boolean debugMode;
+  private boolean gamePaused;
   
-  public GamePanel(boolean debug) {
+  public GamePanel() {
     super();
     hero      = new Ship(new Color(255, 154, 0)); // make the ship orange
     wave      = new Wave(22); // TODO: the size should be a variable depending on the level
-    debugMode = debug;
+    debugMode = false;
     this.setBackground(Color.BLACK);
     this.setFocusable(true);
-    this.addKeyListener(new ShipListener(hero));
+    this.addKeyListener(new ShipListener(hero, this));
   }
   
   protected void paintComponent(Graphics g) {
-    super.paintComponent(g);
-    hero.draw(g);
-    wave.draw(g);
-    if (debugMode) drawGrid(g);
+    if (!gamePaused) {
+      super.paintComponent(g);
+      hero.draw(g);
+      wave.draw(g);
+      if (debugMode) drawGrid(g);
+    } else { // display pause menu
+      g.setColor(Color.WHITE);
+      g.setFont(new Font("Courier New", Font.PLAIN, 14));
+      displayPauseMenu(g);
+    }
+
+  }
+  
+  /**
+   * Draws the pause menu on the screen
+   * @param g - the graphics context to draw on
+   */
+  private void displayPauseMenu(Graphics g) {
+    String debugString = "";
+    g.drawString("Game Paused", Handler.FRAME_WIDTH / 2 - 50, Handler.FRAME_HEIGHT / 2);
+    g.drawString("[p] To Unpause", Handler.FRAME_WIDTH / 2 - 30, Handler.FRAME_HEIGHT / 2);
+    if (debugMode) {
+      debugString = "[d] To Leave Debug Mode";
+    } else {
+      debugString = "[d] To Enter Debug Mode";
+    }
+    g.drawString(debugString, Handler.FRAME_WIDTH / 2 - 10, Handler.FRAME_HEIGHT / 2);
   }
   
   /**
@@ -68,6 +93,35 @@ public class GamePanel extends JPanel {
   public Ship getHero() {
     return hero;
   }
+  
+  /**
+   * @return debugMode
+   */
+  public boolean getDebugMode() {
+    return debugMode;
+  }
+  
+  /**
+   * Sets the debugMode
+   * @param mode - the new debugMode
+   */
+  public void toggleDebugMode() {
+    debugMode = !debugMode;
+  }
+  
+  /**
+   * Toggles the pause state. If the game is paused, it is unpaused and vice versa
+   */
+  public void togglePause() {
+    gamePaused = !gamePaused;
+  }
+  
+  /**
+   * @return whether the game is paused
+   */
+  public boolean isPaused() {
+    return gamePaused;
+  }
 
 }
 
@@ -76,10 +130,12 @@ public class GamePanel extends JPanel {
  */
 class ShipListener implements KeyListener {
   
-  Ship ship;
+  Ship      ship;
+  GamePanel panel;
   
-  public ShipListener(Ship s) {
-    ship = s;
+  public ShipListener(Ship s, GamePanel gp) {
+    ship  = s;
+    panel = gp;
   }
 
   @Override
@@ -98,6 +154,13 @@ class ShipListener implements KeyListener {
     case KeyEvent.VK_SPACE:
       ship.fireLaser();
       break;
+    case KeyEvent.VK_P:
+      panel.togglePause();
+      break;
+    case KeyEvent.VK_D:
+      if (panel.isPaused()) {
+        panel.toggleDebugMode();
+      }
     }
   }
 
