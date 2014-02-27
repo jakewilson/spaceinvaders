@@ -14,12 +14,15 @@ public class Wave {
   
   private ArrayList<Enemy> wave;
   
+  private static int currentDirection;
+  
   public Wave(int n) {
     wave = new ArrayList<Enemy>(n);
     // draw the enemies in rows of 11
     for (int i = 0; i < n; i++) {
       wave.add(i, (new Enemy(Color.GREEN, 30 + (50 * (i % 11)), 30 + (i / 11 * 50))));
     }
+    currentDirection = Enemy.DIRECTION_RIGHT;
   }
   
   /**
@@ -69,8 +72,18 @@ public class Wave {
    *       continues in this fashion.
    */
   public void advance() {
+    // move the entire wave down, then begin moving right or left
+    if (currentDirection == Enemy.DIRECTION_DOWN) {
+      for (int i = 0; i < length(); i++) {
+        wave.get(i).move(Enemy.DIRECTION_DOWN);
+      }
+      currentDirection = Enemy.nextDirection();
+      return;
+    }
+    // continue moving right or left until the DIRECTION_DOWN signal is received
     for (int i = 0; i < length(); i++) {
-      wave.get(i).move(Enemy.DIRECTION_RIGHT);
+      currentDirection = wave.get(i).move(currentDirection);
+      if (currentDirection == Enemy.DIRECTION_DOWN) break;
     }
   }
 
