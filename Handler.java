@@ -22,7 +22,7 @@ public class Handler {
   
   // approximate sizes of borders. The borders of the windows prevent the panel from being the same
   // size as the FRAME_WIDTH and FRAME_HEIGHT, so we have to add the size of the borders to ensure
-  // FRAME_WIDTH and FRAME_HEIGHT are the same as the panel's.
+  // FRAME_WIDTH and FRAME_HEIGHT are the same as the panels.
   public static final int BORDER_WIDTH  = 18;
   public static final int BORDER_HEIGHT = 38;
   

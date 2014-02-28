@@ -78,7 +78,8 @@ public class Ship implements GameObject {
       leftX += direction;
       assignVertices();
     }
-    laser.setLocation(topX, topY);
+    // we don't want to move the laser while it's already moving
+    if (!shotFired) laser.setLocation(topX, topY);
   }
   
   /**
