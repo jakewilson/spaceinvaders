@@ -19,15 +19,13 @@ public class Enemy implements GameObject {
   public static final int DIRECTION_DOWN  = 1;
   public static final int DIRECTION_LEFT  = 2;
   
-  private static int nextDirection; // the next direction for the enemy to move
-  private static int speed; // the speed at which the enemy moves
+  private static int speed;         // the speed at which the enemy moves
 
   public Enemy(Color c, int x, int y) {
     color         = c;
     cornerX       = x;
     cornerY       = y;
     length        = 20;
-    nextDirection = DIRECTION_RIGHT;
     speed         = 10;
   }
   
@@ -66,10 +64,43 @@ public class Enemy implements GameObject {
   }
   
   /**
-   * Moves an enemy
+   * Determines if an enemy has room to move in the specified direction
+   * @param direction the direction in which to check
+   * @return whether the enemy has room in <code>direction</code>
    */
-  public void move() {
-    // TODO: implement functionality here
+  public boolean hasRoom(int direction) {
+    switch (direction) {
+    case DIRECTION_RIGHT:
+      return (((cornerX + length) + speed) < Handler.FRAME_WIDTH - 10);
+    case DIRECTION_LEFT:
+      return ((cornerX - speed) > 10);
+    case DIRECTION_DOWN:
+      return (((cornerY + length) + speed) < Handler.FRAME_HEIGHT - 10);
+    default: // invalid direction (should not occur)
+      return false;  
+    }
+  }
+  
+  /**
+   * Moves an enemy. Will not move if the enemy doesn't have room
+   */
+  public void move(int direction) {
+    if (!this.hasRoom(direction)) return; // if we don't have room, don't move
+    
+    switch (direction) {
+    case DIRECTION_RIGHT:
+      cornerX += speed;
+      break;
+    case DIRECTION_LEFT:
+      cornerX -= speed;
+      break;
+    case DIRECTION_DOWN:
+      cornerY += speed;
+      break;
+    default: // should be impossible, since hasRoom() will return false if not right, left, or down
+      break;
+    }
+    
   }
 
   

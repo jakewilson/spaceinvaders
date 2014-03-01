@@ -14,7 +14,8 @@ public class Wave {
   
   private ArrayList<Enemy> wave;
   
-  private static int currentDirection;
+  private int currentDirection;
+  private int directionCounter;
   
   public Wave(int n) {
     wave = new ArrayList<Enemy>(n);
@@ -23,6 +24,7 @@ public class Wave {
       wave.add(i, (new Enemy(Color.GREEN, 30 + (50 * (i % 11)), 30 + (i / 11 * 50))));
     }
     currentDirection = Enemy.DIRECTION_RIGHT;
+    directionCounter = 0;
   }
   
   /**
@@ -82,12 +84,53 @@ public class Wave {
       wave.remove(index);
   }
   
+  /**
+   * Determines whether the wave as a whole has room in one direction. Every
+   * enemy has to have room for the method to return true. If even one
+   * enemy doesn't have room, false is returned.
+   * @param direction the direction in which to check
+   * @return whether the wave has room in <code>direction</code>
+   */
+  public boolean waveHasRoom(int direction) {
+    boolean hasRoom = true;
+    for (int i = 0; i < this.length(); i++) {
+      if (!wave.get(i).hasRoom(direction))
+        hasRoom = false;
+    }
+    
+    return hasRoom;
+  }
+  
 
   /**
    * Moves the entire wave of enemies
    */
   public void advance() {
-    
+    if (waveHasRoom(currentDirection)) {
+      for (int i = 0 ; i < this.length(); i++)
+        wave.get(i).move(currentDirection);
+      if (currentDirection == Enemy.DIRECTION_DOWN) // we only want to move down once
+        getNextDirection();
+    } else {
+      getNextDirection();
+    }
+  }
+  
+  /**
+   * Change the currentDirection to the next one i.e. :
+   * after moving right, move down, then left, then down, then right, etc...
+   * So every time the directionCounter is odd, we move down.
+   * Every time it's even, we move left or right. 
+   */
+  public void getNextDirection() {
+    if (++directionCounter % 2 == 0) { // an even # means move right or left
+      if (directionCounter % 4 == 0)
+        currentDirection = Enemy.DIRECTION_RIGHT;
+      else
+        currentDirection = Enemy.DIRECTION_LEFT;
+    } else { // every other time we change direction, we want to move down
+      currentDirection = Enemy.DIRECTION_DOWN;
+    }
   }
 
 }
