@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 /**
@@ -91,39 +92,44 @@ public class Wave {
    * @param direction the direction in which to check
    * @return whether the wave has room in <code>direction</code>
    */
-  public boolean waveHasRoom(int direction) {
-    boolean hasRoom = true;
+  private boolean waveHasRoom(int direction) {
     for (int i = 0; i < this.length(); i++) {
       if (!wave.get(i).hasRoom(direction))
-        hasRoom = false;
+        return false;
     }
     
-    return hasRoom;
+    return true;
   }
   
 
   /**
-   * Moves the entire wave of enemies
+   * Moves the entire wave of enemies and has enemies at the front of the wave
+   * randomly fire lasers
    */
   public void advance() {
-    this.getEnemyAt(0).fireLaser();
     if (waveHasRoom(currentDirection)) {
-      for (int i = 0 ; i < this.length(); i++)
+      for (int i = 0 ; i < this.length(); i++) {
+        Random r = new Random();
+        if (this.enemyIsInFront(wave.get(i)) && r.nextInt(50) == 0) {
+          wave.get(i).fireLaser();
+        }
         wave.get(i).move(currentDirection);
+      }
       if (currentDirection == Enemy.DIRECTION_DOWN) // we only want to move down once
         getNextDirection();
     } else {
       getNextDirection();
     }
+    
   }
   
   /**
    * Change the currentDirection to the next one i.e. :
    * after moving right, move down, then left, then down, then right, etc...
    * So every time the directionCounter is odd, we move down.
-   * Every time it's even, we move left or right. 
+   * Every time it's even, we move left or right.
    */
-  public void getNextDirection() {
+  private void getNextDirection() {
     if (++directionCounter % 2 == 0) { // an even # means move right or left
       if (directionCounter % 4 == 0)
         currentDirection = Enemy.DIRECTION_RIGHT;
@@ -139,6 +145,22 @@ public class Wave {
    */
   public boolean isEmpty() {
     return this.length() == 0;
+  }
+  
+  /**
+   * Determines whether the specified enemy is at the front of the wave
+   * @return whether the enemy <code>e</code> is at the front of the wave
+   */
+  private boolean enemyIsInFront(Enemy e) {
+    for (int i = 0; i < length(); i++) {
+      Enemy f = this.getEnemyAt(i);
+      //System.out.printf("e: (%d, %d) f: (%d, %d)\n", e.getCornerX(), e.getCornerY(), f.getCornerX(), f.getCornerY());
+      if (f.getCornerX() == e.getCornerX() && f.getCornerY() > e.getCornerY()) {
+        return false;
+      }
+    }
+    
+    return true;
   }
 
 }

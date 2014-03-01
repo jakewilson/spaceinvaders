@@ -31,7 +31,7 @@ public class Enemy implements GameObject {
     cornerY = y;
     length  = 20;
     speed   = 3;
-    laser   = new Laser(Color.BLUE, 10, Laser.ORIENT_DOWN);
+    laser   = new Laser(new Color(0, 150, 255), 10, Laser.ORIENT_DOWN);
   }
   
   public Enemy(int x, int y) {
@@ -46,7 +46,6 @@ public class Enemy implements GameObject {
     g.setColor(color);
     g.fillOval(cornerX, cornerY, length, length);
     if (shotFired) {
-      System.out.println("Drawing laser");
       laser.draw(g);
       if (laser.isOffScreen())
         shotFired = false;

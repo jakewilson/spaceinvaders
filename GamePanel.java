@@ -34,8 +34,8 @@ public class GamePanel extends JPanel {
   }
   
   protected void paintComponent(Graphics g) {
-    super.paintComponent(g);
     if (!gamePaused) {
+      super.paintComponent(g);
       if (debugMode) {
         drawGrid(g);
         wave.draw(g, true);

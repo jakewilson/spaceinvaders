@@ -93,12 +93,13 @@ public class Laser implements GameObject {
    */
   public void draw(Graphics g) {
     g.setColor(color);
-    g.drawLine(origX, origY, getTipX(), getTipY());
+    g.drawLine(origX, origY, tipX, tipY);
      if (orientation == ORIENT_DOWN) {
        origY++;
      } else if (orientation == ORIENT_UP) {
        origY--; 
      }
+     assignVertices();
   }
   
   /**
@@ -132,14 +133,14 @@ public class Laser implements GameObject {
    * @return the y value of the lasers tip (origY - len)
    */
   public int getTipY() {
-    return origY - length;
+    return tipY;
   }
   
   /**
    * @return the x value of the lasers tip (same as origX)
    */
   public int getTipX() {
-    return origX;
+    return tipX;
   }
   
   /**
