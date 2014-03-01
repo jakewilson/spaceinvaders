@@ -44,11 +44,11 @@ public class Handler {
       Wave wave   = gamePanel.getWave();
       Laser laser = hero.getLaser();
       
-      // TODO: the '5000000' needs to be a variable dependent on how many enemies
+      // TODO: the '500000' needs to be a variable dependent on how many enemies
       //       are left on the screen. The less enemies are left, the faster they move,
       //       which means the counter should have less and less value
       if (!gamePanel.isPaused()) { // only move the enemies if the game is not paused
-        if (counter++ % 5000000 == 0)
+        if (counter++ % 500000 == 0)
           wave.advance();
       }
       
@@ -65,6 +65,10 @@ public class Handler {
           wave.removeEnemyAt(i);
           hero.returnLaser();
         }
+      }
+      
+      if (wave.isEmpty()) {
+        break;
       }
       
     }
@@ -85,8 +89,8 @@ public class Handler {
   
   /**
    * Detects collisions between a laser and an enemy
-   * @param l - the laser
-   * @param e - the enemy
+   * @param l the laser
+   * @param e the enemy
    * @return whether they've collided
    */
   private static boolean detectCollision(Laser l, Enemy e) {
@@ -97,6 +101,17 @@ public class Handler {
     }
     
     return false;
+  }
+  
+  /**
+   * Detects collisions between a laser and a ship
+   * @param l the laser
+   * @param s the ship
+   * @return whether they've collided
+   */
+  private static boolean detectCollision(Laser l, Ship s) {
+    return true;
+    //TODO: implement this fully
   }
 
 }

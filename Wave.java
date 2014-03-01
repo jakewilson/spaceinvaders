@@ -106,6 +106,7 @@ public class Wave {
    * Moves the entire wave of enemies
    */
   public void advance() {
+    //this.getEnemyAt(0).fireLaser();
     if (waveHasRoom(currentDirection)) {
       for (int i = 0 ; i < this.length(); i++)
         wave.get(i).move(currentDirection);
@@ -131,6 +132,13 @@ public class Wave {
     } else { // every other time we change direction, we want to move down
       currentDirection = Enemy.DIRECTION_DOWN;
     }
+  }
+  
+  /**
+   * @return whether any enemies are left in the wave
+   */
+  public boolean isEmpty() {
+    return this.length() == 0;
   }
 
 }

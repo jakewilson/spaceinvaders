@@ -12,6 +12,8 @@ import java.awt.Graphics;
 public class Enemy implements GameObject {
   
   private Color color;
+  private Laser laser;
+  
   private int cornerX, cornerY; // coordinates of the top left corner of the enemy
   private int length;
   
@@ -19,14 +21,17 @@ public class Enemy implements GameObject {
   public static final int DIRECTION_DOWN  = 1;
   public static final int DIRECTION_LEFT  = 2;
   
-  private static int speed;         // the speed at which the enemy moves
+  private int speed;  // the speed at which the enemy moves
+  
+  private boolean shotFired; //
 
   public Enemy(Color c, int x, int y) {
-    color         = c;
-    cornerX       = x;
-    cornerY       = y;
-    length        = 20;
-    speed         = 10;
+    color   = c;
+    cornerX = x;
+    cornerY = y;
+    length  = 20;
+    speed   = 3;
+    laser   = new Laser(Color.BLUE, x + (length / 2), y + length, -10);
   }
   
   public Enemy(int x, int y) {
@@ -40,6 +45,11 @@ public class Enemy implements GameObject {
   public void draw(Graphics g) {
     g.setColor(color);
     g.fillOval(cornerX, cornerY, length, length);
+    if (shotFired) {
+      laser.draw(g);
+      if (laser.isOffScreen())
+        shotFired = false;
+    }
   }
   
   /**
@@ -102,7 +112,14 @@ public class Enemy implements GameObject {
     }
     
   }
-
+  
+  /**
+   * Fires a laser from an enemy
+   */
+  public void fireLaser() {
+    //if (laser.isOffScreen())
+      
+  }
   
   /**
    * Changes the color of an enemy

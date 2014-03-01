@@ -20,7 +20,7 @@ public class Ship implements GameObject {
   
   private boolean shotFired;  // whether the user has fired a shot
   
-  private Laser laser; // the ships laser
+  private Laser laser;        // the ships laser
   
   public final int DIRECTION_RIGHT = 7;
   public final int DIRECTION_LEFT  = -7;
@@ -78,17 +78,16 @@ public class Ship implements GameObject {
       leftX += direction;
       assignVertices();
     }
-    // we don't want to move the laser while it's already moving
-    if (!shotFired) laser.setLocation(topX, topY);
   }
   
   /**
-   * Fires a laser from the top of the ship by creating a new Laser()
+   * Fires a laser from the top of the ship
    */
   public void fireLaser() {
-    if (laser.isOffScreen()) // allow only one shot to be fired at a time
+    if (laser.isOffScreen()) { // allow only one shot to be fired at a time
       laser.setLocation(topX, topY);
-    shotFired = true;
+      shotFired = true;
+    }
   }
   
   /**
@@ -118,10 +117,10 @@ public class Ship implements GameObject {
   }
   
   /**
-   * Return the laser to the top of the ship and stop drawing it
+   * Remove the laser from the screen and stop drawing it
    */
   public void returnLaser() {
-    laser.setLocation(topX, topY);
+    laser.moveOffScreen();
     shotFired = false;
   }
 
