@@ -71,23 +71,7 @@ public class Enemy implements GameObject {
   public void move() {
     // TODO: implement functionality here
   }
-  
-  /**
-   * Returns the direction to move next, and then changes it so it will be in the 
-   * opposite direction next time.
-   * @return the direction in which to move next
-   */
-  public static int nextDirection() {
-//    if (nextDirection == DIRECTION_RIGHT) {
-//      nextDirection = DIRECTION_LEFT;
-//      return DIRECTION_RIGHT;
-//    } else if (nextDirection == DIRECTION_LEFT) {
-//      nextDirection = DIRECTION_RIGHT;
-//      return DIRECTION_LEFT;
-//    } else // should never occur
-//      return -1;
-    return ++nextDirection % 3;
-  }
+
   
   /**
    * Changes the color of an enemy
