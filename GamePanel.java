@@ -36,9 +36,13 @@ public class GamePanel extends JPanel {
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     if (!gamePaused) {
+      if (debugMode) {
+        drawGrid(g);
+        wave.draw(g, true);
+      } else {
+        wave.draw(g);
+      }
       hero.draw(g);
-      wave.draw(g);
-      if (debugMode) drawGrid(g);
     } else { // display pause menu
       g.setColor(Color.WHITE);
       g.setFont(new Font("Courier New", Font.PLAIN, 14));

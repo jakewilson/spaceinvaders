@@ -74,7 +74,7 @@ public class Ship implements GameObject {
     if (direction != DIRECTION_LEFT && direction != DIRECTION_RIGHT)
       return;
     
-    if (rightX + direction < Handler.FRAME_WIDTH - 30 && leftX + direction > 10) {
+    if (rightX + direction < Handler.FRAME_WIDTH - 10 && leftX + direction > 10) {
       leftX += direction;
       assignVertices();
     }

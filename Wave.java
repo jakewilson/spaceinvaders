@@ -20,7 +20,7 @@ public class Wave {
     wave = new ArrayList<Enemy>(n);
     // draw the enemies in rows of 11
     for (int i = 0; i < n; i++) {
-      wave.add(i, (new Enemy(Color.GREEN, 30 + (50 * (11 - (i % 11))), 30 + (i / 11 * 50))));
+      wave.add(i, (new Enemy(Color.GREEN, 30 + (50 * (i % 11)), 30 + (i / 11 * 50))));
     }
     currentDirection = Enemy.DIRECTION_RIGHT;
   }
@@ -32,6 +32,19 @@ public class Wave {
   public void draw(Graphics g) {
     for (int i = 0; i < wave.size(); i++)
       wave.get(i).draw(g);
+  }
+  
+  public void draw(Graphics g, boolean debug) {
+    this.draw(g);
+    if (debug) {
+      g.setColor(Color.BLACK);
+      for (int i = 0; i < wave.size(); i++) {
+        int x   = wave.get(i).getCornerX();
+        int y   = wave.get(i).getCornerY();
+        int len = wave.get(i).getLength();
+        g.drawString(i+"", x + (len / 2), y + (len / 2) + (len / 4));
+      }
+    }
   }
   
   /**
