@@ -23,6 +23,7 @@ public class Handler {
   // approximate sizes of borders. The borders of the windows prevent the panel from being the same
   // size as the FRAME_WIDTH and FRAME_HEIGHT, so we have to add the size of the borders to ensure
   // FRAME_WIDTH and FRAME_HEIGHT are the same as the panels.
+  // TODO: this solution is OS specific. Develop a better solution
   public static final int BORDER_WIDTH  = 18;
   public static final int BORDER_HEIGHT = 38;
   
@@ -92,7 +93,6 @@ public class Handler {
     int x = e.getCornerX(), y = e.getCornerY(), len = e.getLength();
     if ((x <= l.getTipX() && x + len >= l.getTipX()) &&
         (y <= l.getTipY() && y + len >= l.getTipY())) {
-      if (gamePanel.getDebugMode()) e.changeColor(Color.BLUE);
       return true;
     }
     

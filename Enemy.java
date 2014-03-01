@@ -15,9 +15,9 @@ public class Enemy implements GameObject {
   private int cornerX, cornerY; // coordinates of the top left corner of the enemy
   private int length;
   
-  public static final int DIRECTION_DOWN  = 0;
-  public static final int DIRECTION_LEFT  = 1;
-  public static final int DIRECTION_RIGHT = 2;
+  public static final int DIRECTION_RIGHT = 0;
+  public static final int DIRECTION_DOWN  = 1;
+  public static final int DIRECTION_LEFT  = 2;
   
   private static int nextDirection; // the next direction for the enemy to move
   private static int speed; // the speed at which the enemy moves
@@ -27,8 +27,8 @@ public class Enemy implements GameObject {
     cornerX       = x;
     cornerY       = y;
     length        = 20;
-    nextDirection = DIRECTION_LEFT;
-    speed         = 5;
+    nextDirection = DIRECTION_RIGHT;
+    speed         = 10;
   }
   
   public Enemy(int x, int y) {
@@ -66,40 +66,10 @@ public class Enemy implements GameObject {
   }
   
   /**
-   * Moves the enemy. If the enemy is moving right or left and still has
-   * room, DIRECTION_RIGHT or DIRECTION_LEFT will be returned. If an enemy has
-   * reached the wall, DIRECTION_DOWN will be returned, which tells Wave.advance()
-   * to begin moving down. DIRECTION_DOWN always immediately returns RIGHT or LEFT,
-   * since it always moves down just once, depending on whether it moved right or left last time.
-   * NOTE: this function should never be called. It is called in Wave.advance().
-   * 
-   * @param direction - the direction in which to move
-   * @return the direction in which to move next
+   * Moves an enemy
    */
-  public int move(int direction) {
-    switch (direction) {
-    case DIRECTION_RIGHT:
-      if ((cornerX + length) + speed < Handler.FRAME_WIDTH) {
-        cornerX += speed;
-        return DIRECTION_RIGHT;
-      }
-      return DIRECTION_DOWN;
-    case DIRECTION_LEFT:
-      if (cornerX - speed > 0) {
-        cornerX -= speed;
-        return DIRECTION_LEFT;
-      }
-      return DIRECTION_DOWN;
-    case DIRECTION_DOWN:
-      if ((cornerY + length) + speed < Handler.FRAME_HEIGHT) {
-        cornerY += speed;
-        return DIRECTION_DOWN;
-      }
-      return DIRECTION_DOWN;
-    default: // invalid direction (should never occur)
-      System.out.println("Invalid direction: " + direction);
-      return -1;
-    }
+  public void move() {
+    // TODO: implement functionality here
   }
   
   /**
@@ -108,14 +78,15 @@ public class Enemy implements GameObject {
    * @return the direction in which to move next
    */
   public static int nextDirection() {
-    if (nextDirection == DIRECTION_RIGHT) {
-      nextDirection = DIRECTION_LEFT;
-      return DIRECTION_RIGHT;
-    } else if (nextDirection == DIRECTION_LEFT) {
-      nextDirection = DIRECTION_RIGHT;
-      return DIRECTION_LEFT;
-    } else // should never occur
-      return -1;
+//    if (nextDirection == DIRECTION_RIGHT) {
+//      nextDirection = DIRECTION_LEFT;
+//      return DIRECTION_RIGHT;
+//    } else if (nextDirection == DIRECTION_LEFT) {
+//      nextDirection = DIRECTION_RIGHT;
+//      return DIRECTION_LEFT;
+//    } else // should never occur
+//      return -1;
+    return ++nextDirection % 3;
   }
   
   /**

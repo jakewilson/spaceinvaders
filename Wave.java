@@ -20,7 +20,7 @@ public class Wave {
     wave = new ArrayList<Enemy>(n);
     // draw the enemies in rows of 11
     for (int i = 0; i < n; i++) {
-      wave.add(i, (new Enemy(Color.GREEN, 30 + (50 * (i % 11)), 30 + (i / 11 * 50))));
+      wave.add(i, (new Enemy(Color.GREEN, 30 + (50 * (11 - (i % 11))), 30 + (i / 11 * 50))));
     }
     currentDirection = Enemy.DIRECTION_RIGHT;
   }
@@ -80,11 +80,19 @@ public class Wave {
       currentDirection = Enemy.nextDirection();
       return;
     }
-    // continue moving right or left until the DIRECTION_DOWN signal is received
-    for (int i = 0; i < length(); i++) {
-      currentDirection = wave.get(i).move(currentDirection);
-      if (currentDirection == Enemy.DIRECTION_DOWN) break;
+    
+    for (int i = 10, j = length() - 1; i >= 0 && j >= 10; i--, j--) {
+      if (!wave.get(i).move(currentDirection) || !wave.get(j).move(currentDirection)) {
+        currentDirection = Enemy.nextDirection();
+      }
     }
+    
+    // continue moving right or left until the DIRECTION_DOWN signal is received
+//    for (int i = 0; i < length(); i++) {
+//      currentDirection = wave.get(i).move(currentDirection);
+//      if (currentDirection == Enemy.DIRECTION_DOWN)
+//          break;
+//    }
   }
 
 }
