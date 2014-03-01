@@ -33,7 +33,7 @@ public class Ship implements GameObject {
   public Ship(Color c) {
     color     = c;
     shotFired = false;
-    laser     = new Laser(Color.RED, topX, topY, 20);
+    laser     = new Laser(Color.RED, topX, topY, 20, Laser.ORIENT_UP);
     laser.moveOffScreen();
     this.goToStartingPoint();
   }

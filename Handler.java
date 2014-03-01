@@ -40,9 +40,9 @@ public class Handler {
     int counter = 0; // loop counter
     while (true) { // game loop
       gamePanel.repaint(); // redraw the screen
-      Ship hero   = gamePanel.getHero();
-      Wave wave   = gamePanel.getWave();
-      Laser laser = hero.getLaser();
+      Ship hero    = gamePanel.getHero();
+      Wave wave    = gamePanel.getWave();
+      Laser hLaser = hero.getLaser();
       
       // TODO: the '500000' needs to be a variable dependent on how many enemies
       //       are left on the screen. The less enemies are left, the faster they move,
@@ -57,9 +57,9 @@ public class Handler {
       for (int i = 0; i < wave.length(); i++) {
         // if the laser has hit an enemy
         Enemy e = wave.getEnemyAt(i);
-        if (detectCollision(laser, e)) {
+        if (detectCollision(hLaser, e)) {
           if (gamePanel.getDebugMode()) {
-            System.out.printf("Laser tip: (%d, %d)\n", laser.getTipX(), laser.getTipY());
+            System.out.printf("Laser tip: (%d, %d)\n", hLaser.getTipX(), hLaser.getTipY());
             System.out.printf("Enemy corner: (%d, %d) l: %d\n", e.getCornerX(), e.getCornerY(), e.getLength());
           }
           wave.removeEnemyAt(i);

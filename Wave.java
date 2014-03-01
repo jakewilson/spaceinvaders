@@ -106,7 +106,7 @@ public class Wave {
    * Moves the entire wave of enemies
    */
   public void advance() {
-    //this.getEnemyAt(0).fireLaser();
+    this.getEnemyAt(0).fireLaser();
     if (waveHasRoom(currentDirection)) {
       for (int i = 0 ; i < this.length(); i++)
         wave.get(i).move(currentDirection);
