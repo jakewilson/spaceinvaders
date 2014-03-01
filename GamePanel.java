@@ -53,7 +53,7 @@ public class GamePanel extends JPanel {
   
   /**
    * Draws the pause menu on the screen
-   * @param g - the graphics context to draw on
+   * @param g the graphics context to draw on
    */
   private void displayPauseMenu(Graphics g) {
     String debugString = "";
@@ -107,7 +107,7 @@ public class GamePanel extends JPanel {
   
   /**
    * Sets the debugMode
-   * @param mode - the new debugMode
+   * @param mode the new debugMode
    */
   public void toggleDebugMode() {
     debugMode = !debugMode;

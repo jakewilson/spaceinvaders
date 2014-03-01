@@ -27,15 +27,22 @@ public class Wave {
   
   /**
    * Draws the entire array of enemies
-   * @param g - The graphics context to draw on
+   * @param g The graphics context to draw on
    */
   public void draw(Graphics g) {
-    for (int i = 0; i < wave.size(); i++)
-      wave.get(i).draw(g);
+    this.draw(g, false);
   }
   
+  /**
+   * Draws the entire array of enemies and the index number of each enemy
+   * if the debug param is true
+   * @param g The graphics context to draw on
+   * @param debug whether to draw the debug content as well
+   */
   public void draw(Graphics g, boolean debug) {
-    this.draw(g);
+    for (int i = 0; i < wave.size(); i++)
+      wave.get(i).draw(g);
+    
     if (debug) {
       g.setColor(Color.BLACK);
       for (int i = 0; i < wave.size(); i++) {
@@ -56,7 +63,7 @@ public class Wave {
   
   /**
    * Returns the enemy at the specified index or null if the index is out of bounds.
-   * @param index - the index of the enemy array
+   * @param index the index of the enemy array
    * @return the enemy at index or null if index is out of bounds
    */
   public Enemy getEnemyAt(int index) {
@@ -68,7 +75,7 @@ public class Wave {
   
   /**
    * Removes an enemy at the specified index from the ArrayList
-   * @param index - the index at which to remove an enemy
+   * @param index the index at which to remove an enemy
    */
   public void removeEnemyAt(int index) {
     if (index >= 0 && index < wave.size())

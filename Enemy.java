@@ -37,7 +37,7 @@ public class Enemy implements GameObject {
   
   /**
    * Draws an enemy on the screen
-   * @param g - The graphics context to draw on
+   * @param g The graphics context to draw on
    */
   public void draw(Graphics g) {
     g.setColor(color);
@@ -75,7 +75,7 @@ public class Enemy implements GameObject {
   
   /**
    * Changes the color of an enemy
-   * @param c - the new color
+   * @param c the new color
    */
   public void changeColor(Color c) {
     color = c;

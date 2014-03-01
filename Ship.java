@@ -28,7 +28,7 @@ public class Ship implements GameObject {
   /**
    * Constructor that sets the ships color to c and sets the ship to the middle of the
    * bottom of the screen
-   * @param c - the color of the ship
+   * @param c the color of the ship
    */
   public Ship(Color c) {
     color     = c;
@@ -48,7 +48,7 @@ public class Ship implements GameObject {
   
   /**
    * Draws the ship and the laser if a shot has been fired
-   * @param g - The graphics context to draw on
+   * @param g The graphics context to draw on
    */
   public void draw(Graphics g) {
     g.setColor(color);
@@ -68,7 +68,7 @@ public class Ship implements GameObject {
    * Moves the ship right or left. If the param is not DIRECTION_RIGHT or DIRECTION_LEFT
    * the ship will not move. If moving will cause the ship to move off of the screen,
    * the ship will not move.
-   * @param direction - DIRECTION_LEFT or DIRECTION_RIGHT
+   * @param direction DIRECTION_LEFT or DIRECTION_RIGHT
    */
   public void move(int direction) {
     if (direction != DIRECTION_LEFT && direction != DIRECTION_RIGHT)
