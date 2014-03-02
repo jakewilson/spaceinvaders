@@ -4,7 +4,13 @@ import java.awt.Graphics;
 
 /**
  * Laser.java
- * Laser projectile used by the ship.
+ * Laser projectile used by the ship and enemies. A laser
+ * has an orientation which is used to determine which direction
+ * the laser will be moving. 
+ * For example: the ships laser travel upward towards the wave
+ * of enemies, but the enemies laser travel downward towards the ship.
+ * A laser also has a color, an origin (x, y) point, and a length that
+ * is used (with the orientation) to determine the tip of the laser.
  *
  * @author  Jake Wilson
  * @version Feb 20, 2014

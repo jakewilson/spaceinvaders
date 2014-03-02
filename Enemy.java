@@ -4,7 +4,9 @@ import java.awt.Graphics;
 
 /**
  * Enemy.java
- * The enemy that the ship is fighting
+ * The enemy that the ship is fighting. Capabilities include
+ * movement towards the ship and laser firing. If an enemy is hit
+ * by the ships laser, it is dead.
  *
  * @author  Jake Wilson
  * @version Feb 15, 2014

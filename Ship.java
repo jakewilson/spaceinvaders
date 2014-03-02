@@ -5,7 +5,9 @@ import java.awt.Polygon;
 
 /**
  * Ship.java
- * The ship that the user plays as.
+ * The ship that the user plays as. Capabilities include firing laser
+ * and horizontal movement. When the ship gets hit by a single enemy laser,
+ * the game is over.
  *
  * @author  Jake Wilson
  * @version Feb 15, 2014

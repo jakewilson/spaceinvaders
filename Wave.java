@@ -6,7 +6,11 @@ import java.util.Random;
 
 /**
  * Wave.java
- * The 'wave' of approaching enemies: contains an array of enemy objects.
+ * Class that contains an array of enemies to represent the 'wave'.
+ * Responsibilities include removing and killing enemies at a certain index and
+ * advancing the wave of enemies horizontally across and vertically down
+ * the screen towards the ship. It also controls firing of individual enemies
+ * at random times and draws each enemy.
  *
  * @author  Jake Wilson
  * @version Feb 16, 2014
@@ -44,9 +48,10 @@ public class Wave {
    */
   public void draw(Graphics g, boolean debug) {
     for (int i = 0; i < wave.size(); i++) {
-      // if the enemy is dead and it's laser is off the screen, remove it from the wave
+      // if the enemy is dead and its laser is off the screen, remove it from the wave
       if (!wave.get(i).isAlive() && wave.get(i).getLaser().isOffScreen())
         removeEnemyAt(i);
+      
       wave.get(i).draw(g);
     }
     
