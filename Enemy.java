@@ -21,7 +21,7 @@ public class Enemy implements GameObject {
   public static final int DIRECTION_DOWN  = 1;
   public static final int DIRECTION_LEFT  = 2;
   
-  private int speed;  // the speed at which the enemy moves
+  private final float speed = 2f;  // the speed at which the enemy moves
   
   private boolean shotFired;
 
@@ -30,7 +30,6 @@ public class Enemy implements GameObject {
     cornerX = x;
     cornerY = y;
     length  = 20;
-    speed   = 3;
     laser   = new Laser(new Color(0, 150, 255), 10, Laser.ORIENT_DOWN, 0.15f);
   }
   
@@ -45,6 +44,7 @@ public class Enemy implements GameObject {
   public void draw(Graphics g) {
     g.setColor(color);
     g.fillOval((int)cornerX, (int)cornerY, (int)length, (int)length);
+    
     if (shotFired) {
       laser.draw(g);
       if (laser.isOffScreen())
