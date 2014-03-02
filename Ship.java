@@ -19,6 +19,7 @@ public class Ship implements GameObject {
   private float topX  , topY;   // coordinates of the top   vertex of the triangle
   
   private boolean shotFired;  // whether the user has fired a shot
+  private boolean isAlive;
   
   private Laser laser;        // the ships laser
   
@@ -34,6 +35,7 @@ public class Ship implements GameObject {
     color     = c;
     shotFired = false;
     laser     = new Laser(Color.RED, 20, Laser.ORIENT_UP, 0.4f);
+    isAlive   = true;
     laser.moveOffScreen();
     this.goToStartingPoint();
   }
@@ -51,16 +53,18 @@ public class Ship implements GameObject {
    * @param g The graphics context to draw on
    */
   public void draw(Graphics g) {
-    g.setColor(color);
-    int[] xPoints = {(int)leftX, (int)topX, (int)rightX};
-    int[] yPoints = {(int)leftY, (int)topY, (int)rightY};
-    Polygon p = new Polygon(xPoints, yPoints, 3);
-    g.fillPolygon(p);
-    g.drawPolygon(p);
-    if (shotFired) { // if a shot has been fired, draw it on the screen
-      laser.draw(g);
-      if (laser.isOffScreen())
-        shotFired = false; // if the laser is off the screen, stop drawing it
+    if (isAlive) {
+      g.setColor(color);
+      int[] xPoints = {(int)leftX, (int)topX, (int)rightX};
+      int[] yPoints = {(int)leftY, (int)topY, (int)rightY};
+      Polygon p = new Polygon(xPoints, yPoints, 3);
+      g.fillPolygon(p);
+      g.drawPolygon(p);
+      if (shotFired) { // if a shot has been fired, draw it on the screen
+        laser.draw(g);
+        if (laser.isOffScreen())
+          shotFired = false; // if the laser is off the screen, stop drawing it
+      }
     }
   }
   
@@ -164,6 +168,13 @@ public class Ship implements GameObject {
    */
   public float getRightY() {
     return rightY;
+  }
+  
+  /**
+   * Kills the ship
+   */
+  public void kill() {
+    isAlive = false;
   }
 
 }

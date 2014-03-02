@@ -62,13 +62,18 @@ public class Handler {
         Enemy e = wave.getEnemyAt(i);
           
         // TODO: we don't want to remove the laser after an enemy has died
-        if (detectCollision(hLaser, e)) {
+        if (detectCollision(hLaser, e)) { // check for collisions between the enemies and ships laser
           if (gamePanel.getDebugMode()) {
             System.out.printf("Laser tip: (%f, %f)\n", hLaser.getTipX(), hLaser.getTipY());
             System.out.printf("Enemy corner: (%d, %d) l: %d\n", e.getCornerX(), e.getCornerY(), e.getLength());
           }
           wave.removeEnemyAt(i);
           hero.returnLaser();
+        }
+        
+        // check for collisions between the enemies lasers and the ship
+        if (detectCollision(e.getLaser(), hero)) {
+          hero.kill();
         }
       }
       
@@ -117,8 +122,15 @@ public class Handler {
    * @return whether they've collided
    */
   private static boolean detectCollision(Laser l, Ship s) {
-    return true;
-    //TODO: implement this fully
+    float lX = s.getLeftX() , lY = s.getLeftY();
+    float rX = s.getRightX(), rY = s.getRightY();
+    float tX = s.getTopX()  , tY = s.getTopY();
+    if ((lX <= l.getTipX() && rX >= l.getTipX()) &&
+        (tY <= l.getTipY() && lY >= l.getTipY())) {
+      return true;
+    }
+    
+    return false;
   }
 
 }
