@@ -43,8 +43,12 @@ public class Wave {
    * @param debug whether to draw the debug content as well
    */
   public void draw(Graphics g, boolean debug) {
-    for (int i = 0; i < wave.size(); i++)
+    for (int i = 0; i < wave.size(); i++) {
+      // if the enemy is dead and it's laser is off the screen, remove it from the wave
+      if (!wave.get(i).isAlive() && wave.get(i).getLaser().isOffScreen())
+        removeEnemyAt(i);
       wave.get(i).draw(g);
+    }
     
     if (debug) {
       g.setColor(Color.BLACK);
