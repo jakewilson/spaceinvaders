@@ -109,18 +109,25 @@ public class Wave {
   public void advance() {
     if (waveHasRoom(currentDirection)) {
       for (int i = 0 ; i < this.length(); i++) {
-        Random r = new Random();
-        if (this.enemyIsInFront(wave.get(i)) && r.nextInt(50) == 0) {
-          wave.get(i).fireLaser();
-        }
         wave.get(i).move(currentDirection);
       }
       if (currentDirection == Enemy.DIRECTION_DOWN) // we only want to move down once
         getNextDirection();
     } else {
       getNextDirection();
+    } 
+  }
+  
+  /**
+   * Fires lasers of the enemies in front of the wave
+   */
+  public void fire() {
+    for (int i = 0; i < this.length(); i++) {
+      Random r = new Random();
+      if (enemyIsInFront(wave.get(i)) && r.nextInt(50) == 0) {
+        wave.get(i).fireLaser();
+      }
     }
-    
   }
   
   /**
@@ -154,7 +161,6 @@ public class Wave {
   private boolean enemyIsInFront(Enemy e) {
     for (int i = 0; i < length(); i++) {
       Enemy f = this.getEnemyAt(i);
-      //System.out.printf("e: (%d, %d) f: (%d, %d)\n", e.getCornerX(), e.getCornerY(), f.getCornerX(), f.getCornerY());
       if (f.getCornerX() == e.getCornerX() && f.getCornerY() > e.getCornerY()) {
         return false;
       }

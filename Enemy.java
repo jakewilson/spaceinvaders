@@ -121,7 +121,14 @@ public class Enemy implements GameObject {
       laser.setLocation(cornerX + (length / 2), cornerY + length);
       shotFired = true;
     }
-      
+  }
+  
+  /**
+   * Moves a laser if and only if a shot has been fired
+   */
+  public void moveLaser() {
+    if (shotFired)
+      laser.move();
   }
   
   /**

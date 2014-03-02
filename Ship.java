@@ -59,8 +59,9 @@ public class Ship implements GameObject {
     g.drawPolygon(p);
     if (shotFired) { // if a shot has been fired, draw it on the screen
       laser.draw(g);
+      laser.move();
       if (laser.isOffScreen())
-        shotFired = false; // if the laser is off the screen, stop moving it
+        shotFired = false; // if the laser is off the screen, stop drawing it
     }
   }
   

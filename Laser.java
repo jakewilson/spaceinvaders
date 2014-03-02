@@ -19,8 +19,8 @@ public class Laser implements GameObject {
   private int orientation; // the orientation in which to draw/move the laser
   
   // possible orientations to draw and move the laser
-  public static final int ORIENT_DOWN = 0;
-  public static final int ORIENT_UP   = 1;
+  public static final int ORIENT_UP   = -1;
+  public static final int ORIENT_DOWN =  1;
   
   /**
    * Sets color, x and y coordinates, length, and orient to the parameters
@@ -32,11 +32,9 @@ public class Laser implements GameObject {
    */
   public Laser(Color c, int x, int y, int len, int orient) {
     color       = c;
-    origX       = x;
-    origY       = y;
     length      = len;
+    setLocation(x, y);
     setOrient(orient);
-    assignVertices();
   }
   
   /**
@@ -94,12 +92,13 @@ public class Laser implements GameObject {
   public void draw(Graphics g) {
     g.setColor(color);
     g.drawLine(origX, origY, tipX, tipY);
-     if (orientation == ORIENT_DOWN) {
-       origY++;
-     } else if (orientation == ORIENT_UP) {
-       origY--; 
-     }
-     assignVertices();
+  }
+  
+  /**
+   * Moves a laser in the direction of it's orientation
+   */
+  public void move() {
+    this.setLocation(origX, origY + orientation);
   }
   
   /**
@@ -114,8 +113,8 @@ public class Laser implements GameObject {
    * Moves the laser off the screen
    */
   public void moveOffScreen() {
+    System.out.println("Moving off screen");
     this.setLocation(-50, -50);
-    this.assignVertices();
   }
   
   /**
@@ -170,6 +169,7 @@ public class Laser implements GameObject {
   public void setLocation(int x, int y) {
     origX = x;
     origY = y;
+    assignVertices();
   }
 
 }

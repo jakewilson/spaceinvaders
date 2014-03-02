@@ -48,15 +48,24 @@ public class Handler {
       //       are left on the screen. The less enemies are left, the faster they move,
       //       which means the counter should have less and less value
       if (!gamePanel.isPaused()) { // only move the enemies if the game is not paused
-        if (counter++ % 500000 == 0)
+        if (counter++ % 500000 == 0) {
           wave.advance();
+          wave.fire();
+        }
       }
+      
       
       
       // check if the laser has collided with an enemy
       for (int i = 0; i < wave.length(); i++) {
         // if the laser has hit an enemy
         Enemy e = wave.getEnemyAt(i);
+        
+        // move the enemies laser every 30,000 cycles
+        if (counter % 30000 == 0) {
+          e.moveLaser();
+        }
+          
         if (detectCollision(hLaser, e)) {
           if (gamePanel.getDebugMode()) {
             System.out.printf("Laser tip: (%d, %d)\n", hLaser.getTipX(), hLaser.getTipY());
