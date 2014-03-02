@@ -6,7 +6,7 @@ import java.awt.Graphics;
  * Laser.java
  * Laser projectile used by the ship.
  *
- * @author  Jake
+ * @author  Jake Wilson
  * @version Feb 20, 2014
  */
 public class Laser implements GameObject {

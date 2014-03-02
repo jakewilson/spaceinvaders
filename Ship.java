@@ -7,7 +7,7 @@ import java.awt.Polygon;
  * Ship.java
  * The ship that the user plays as.
  *
- * @author  Jake
+ * @author  Jake Wilson
  * @version Feb 15, 2014
  */
 public class Ship implements GameObject {
@@ -175,6 +175,13 @@ public class Ship implements GameObject {
    */
   public void kill() {
     isAlive = false;
+  }
+  
+  /**
+   * @return whether the hero is alive or not
+   */
+  public boolean isAlive() {
+    return isAlive;
   }
 
 }

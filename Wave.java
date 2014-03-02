@@ -8,7 +8,7 @@ import java.util.Random;
  * Wave.java
  * The 'wave' of approaching enemies: contains an array of enemy objects.
  *
- * @author  Jake
+ * @author  Jake Wilson
  * @version Feb 16, 2014
  */
 public class Wave {

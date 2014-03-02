@@ -12,7 +12,7 @@ import javax.swing.JPanel;
  * GamePanel.java
  * This class is responsible for drawing the game features and handling any button presses.
  *
- * @author  Jake
+ * @author  Jake Wilson
  * @version Feb 15, 2014
  */
 public class GamePanel extends JPanel {
@@ -22,6 +22,9 @@ public class GamePanel extends JPanel {
   
   private boolean debugMode;
   private boolean gamePaused;
+  
+  // the x location of any menu we want to print (gameOver, pause)
+  private final int MENU_X = Handler.FRAME_WIDTH / 2 - Handler.FRAME_WIDTH / 10;
   
   public GamePanel() {
     super();
@@ -35,20 +38,32 @@ public class GamePanel extends JPanel {
   
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
-    if (!gamePaused) {
-      if (debugMode) {
-        drawGrid(g);
-        wave.draw(g, true);
-      } else {
-        wave.draw(g);
+    if (hero.isAlive()) {
+      if (!gamePaused) {
+        if (debugMode) {
+          drawGrid(g);
+          wave.draw(g, true);
+        } else {
+          wave.draw(g);
+        }
+        hero.draw(g);
+      } else { // display pause menu
+        displayPauseMenu(g);
       }
-      hero.draw(g);
-    } else { // display pause menu
-      g.setColor(Color.WHITE);
-      g.setFont(new Font("Courier New", Font.PLAIN, 14));
-      displayPauseMenu(g);
+    } else { // if the hero is dead, the game is over
+      displayGameOver(g);
     }
-
+  }
+  
+  /**
+   * Draws the game over screen
+   * @param g the graphics context to draw on
+   */
+  private void displayGameOver(Graphics g) {
+    g.setColor(Color.WHITE);
+    g.setFont(new Font("Courier New", Font.PLAIN, 14));
+    g.drawString("Game Over"        , MENU_X, Handler.FRAME_HEIGHT / 2 - 60);
+    g.drawString("Play Again (y/n)?", MENU_X, Handler.FRAME_HEIGHT / 2 - 40);
   }
   
   /**
@@ -56,15 +71,17 @@ public class GamePanel extends JPanel {
    * @param g the graphics context to draw on
    */
   private void displayPauseMenu(Graphics g) {
+    g.setColor(Color.WHITE);
+    g.setFont(new Font("Courier New", Font.PLAIN, 14));
     String debugString = "";
-    g.drawString("Game Paused", Handler.FRAME_WIDTH / 2, Handler.FRAME_HEIGHT / 2 - 60);
-    g.drawString("[p] To Unpause", Handler.FRAME_WIDTH / 2, Handler.FRAME_HEIGHT / 2 - 40);
+    g.drawString("Game Paused"   , MENU_X, Handler.FRAME_HEIGHT / 2 - 60);
+    g.drawString("[p] To Unpause", MENU_X, Handler.FRAME_HEIGHT / 2 - 40);
     if (debugMode) {
       debugString = "[d] To Leave Debug Mode";
     } else {
       debugString = "[d] To Enter Debug Mode";
     }
-    g.drawString(debugString, Handler.FRAME_WIDTH / 2, Handler.FRAME_HEIGHT / 2 - 20);
+    g.drawString(debugString, MENU_X, Handler.FRAME_HEIGHT / 2 - 20);
   }
   
   /**

@@ -9,7 +9,7 @@ import javax.swing.JFrame;
  * Handler draws the game window, adds the panel, runs the game loop,
  * and detects collisions between game objects.
  *
- * @author  Jake
+ * @author  Jake Wilson
  * @version Feb 15, 2014
  */
 public class Handler {
@@ -44,6 +44,10 @@ public class Handler {
       Wave wave    = gamePanel.getWave();
       Laser hLaser = hero.getLaser();
       
+      if (!hero.isAlive()) { // if the hero is dead
+        break;
+      }
+      
       // TODO: the '500000' needs to be a variable dependent on how many enemies
       //       are left on the screen. The less enemies are left, the faster they move,
       //       which means the counter should have less and less value
@@ -74,6 +78,7 @@ public class Handler {
         // check for collisions between the enemies lasers and the ship
         if (detectCollision(e.getLaser(), hero)) {
           hero.kill();
+          break;
         }
       }
       

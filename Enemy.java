@@ -6,7 +6,7 @@ import java.awt.Graphics;
  * Enemy.java
  * The enemy that the ship is fighting
  *
- * @author  Jake
+ * @author  Jake Wilson
  * @version Feb 15, 2014
  */
 public class Enemy implements GameObject {
