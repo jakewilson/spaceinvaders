@@ -44,7 +44,7 @@ public class Handler {
       Wave wave    = gamePanel.getWave();
       Laser hLaser = hero.getLaser();
       
-      if (!hero.isAlive()) { // if the hero is dead
+      if (!hero.isAlive()) {
         break;
       }
       
@@ -69,9 +69,9 @@ public class Handler {
         if (detectCollision(hLaser, e)) { // check for collisions between the enemies and ships laser
           if (gamePanel.getDebugMode()) {
             System.out.printf("Laser tip: (%f, %f)\n", hLaser.getTipX(), hLaser.getTipY());
-            System.out.printf("Enemy corner: (%d, %d) l: %d\n", e.getCornerX(), e.getCornerY(), e.getLength());
+            System.out.printf("Enemy corner: (%f, %f) l: %f\n", e.getCornerX(), e.getCornerY(), e.getLength());
           }
-          wave.removeEnemyAt(i);
+          wave.killEnemyAt(i);
           hero.returnLaser();
         }
         

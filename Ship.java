@@ -60,11 +60,12 @@ public class Ship implements GameObject {
       Polygon p = new Polygon(xPoints, yPoints, 3);
       g.fillPolygon(p);
       g.drawPolygon(p);
-      if (shotFired) { // if a shot has been fired, draw it on the screen
-        laser.draw(g);
-        if (laser.isOffScreen())
-          shotFired = false; // if the laser is off the screen, stop drawing it
-      }
+    }
+    // we want to continue to fire the laser even if the ship has been killed
+    if (shotFired) { // if a shot has been fired, draw it on the screen
+      laser.draw(g);
+      if (laser.isOffScreen())
+        shotFired = false; // if the laser is off the screen, stop drawing it
     }
   }
   

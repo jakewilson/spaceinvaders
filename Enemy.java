@@ -17,6 +17,8 @@ public class Enemy implements GameObject {
   private float cornerX, cornerY; // coordinates of the top left corner of the enemy
   private float length;
   
+  private boolean isAlive;
+  
   public static final int DIRECTION_RIGHT = 0;
   public static final int DIRECTION_DOWN  = 1;
   public static final int DIRECTION_LEFT  = 2;
@@ -31,6 +33,7 @@ public class Enemy implements GameObject {
     cornerY = y;
     length  = 20;
     laser   = new Laser(new Color(0, 150, 255), 10, Laser.ORIENT_DOWN, 0.15f);
+    isAlive = true;
   }
   
   public Enemy(int x, int y) {
@@ -42,8 +45,10 @@ public class Enemy implements GameObject {
    * @param g The graphics context to draw on
    */
   public void draw(Graphics g) {
-    g.setColor(color);
-    g.fillOval((int)cornerX, (int)cornerY, (int)length, (int)length);
+    if (isAlive) {    
+      g.setColor(color);
+      g.fillOval((int)cornerX, (int)cornerY, (int)length, (int)length);
+    }
     
     if (shotFired) {
       laser.draw(g);
@@ -136,6 +141,20 @@ public class Enemy implements GameObject {
    */
   public void changeColor(Color c) {
     color = c;
+  }
+  
+  /**
+   * @return whether the enemy is alive or not
+   */
+  public boolean isAlive() {
+    return isAlive;
+  }
+  
+  /**
+   * Kills the enemy
+   */
+  public void kill() {
+    isAlive = false;
   }
   
 }

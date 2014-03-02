@@ -86,6 +86,14 @@ public class Wave {
   }
   
   /**
+   * Kills an enemy at the specified index
+   * @param index the index of the enemy to kill
+   */
+  public void killEnemyAt(int index) {
+    this.getEnemyAt(index).kill();
+  }
+  
+  /**
    * Determines whether the wave as a whole has room in one direction. Every
    * enemy has to have room for the method to return true. If even one
    * enemy doesn't have room, false is returned.
