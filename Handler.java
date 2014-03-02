@@ -18,7 +18,7 @@ public class Handler {
   private static JFrame    gameFrame;
   
   public static final int FRAME_WIDTH  = 600;
-  public static final int FRAME_HEIGHT = 400;
+  public static final int FRAME_HEIGHT = 500;
   
   // approximate sizes of borders. The borders of the windows prevent the panel from being the same
   // size as the FRAME_WIDTH and FRAME_HEIGHT, so we have to add the size of the borders to ensure
@@ -50,7 +50,7 @@ public class Handler {
       if (!gamePanel.isPaused()) { // only move the enemies if the game is not paused
         if (counter++ % 500000 == 0) {
           wave.advance();
-          wave.fire();
+          wave.fire(); // fire lasers from enemies in the front randomly
         }
       }
       
@@ -61,6 +61,7 @@ public class Handler {
         // if the laser has hit an enemy
         Enemy e = wave.getEnemyAt(i);
           
+        // TODO: we don't want to remove the laser after an enemy has died
         if (detectCollision(hLaser, e)) {
           if (gamePanel.getDebugMode()) {
             System.out.printf("Laser tip: (%f, %f)\n", hLaser.getTipX(), hLaser.getTipY());

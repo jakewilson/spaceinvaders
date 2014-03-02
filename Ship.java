@@ -123,5 +123,47 @@ public class Ship implements GameObject {
     laser.moveOffScreen();
     shotFired = false;
   }
+  
+  /**
+   * @return the top x coordinate of the ship
+   */
+  public float getTopX() {
+    return topX;
+  }
+  
+  /**
+   * @return the top y coordinate of the ship
+   */
+  public float getTopY() {
+    return topY;
+  }
+  
+  /**
+   * @return the left x coordinate of the ship
+   */
+  public float getLeftX() {
+    return leftX;
+  }
+  
+  /**
+   * @return the left y coordinate of the ship
+   */
+  public float getLeftY() {
+    return leftY;
+  }
+  
+  /**
+   * @return the right x coordinate of the ship
+   */
+  public float getRightX() {
+    return rightX;
+  }
+  
+  /**
+   * @return the right y coordinate of the ship
+   */
+  public float getRightY() {
+    return rightY;
+  }
 
 }

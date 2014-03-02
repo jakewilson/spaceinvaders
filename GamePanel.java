@@ -26,7 +26,7 @@ public class GamePanel extends JPanel {
   public GamePanel() {
     super();
     hero      = new Ship(new Color(255, 154, 0)); // make the ship orange
-    wave      = new Wave(22); // TODO: the size should be a variable depending on the level
+    wave      = new Wave(44); // TODO: the size should be a variable depending on the level
     debugMode = false;
     this.setBackground(Color.BLACK);
     this.setFocusable(true);

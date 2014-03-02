@@ -124,6 +124,13 @@ public class Enemy implements GameObject {
   }
   
   /**
+   * @return the enemy's laser
+   */
+  public Laser getLaser() {
+    return laser;
+  }
+  
+  /**
    * Changes the color of an enemy
    * @param c the new color
    */
