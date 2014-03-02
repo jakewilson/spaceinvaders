@@ -12,8 +12,8 @@ import java.awt.Graphics;
 public class Laser implements GameObject {
   
   private Color  color;
-  private double origX, origY;
-  private double tipX,  tipY;
+  private float origX, origY;
+  private float tipX,  tipY;
   private int    length;
   
   private int orientation; // the orientation in which to draw/move the laser
@@ -22,7 +22,7 @@ public class Laser implements GameObject {
   public static final int ORIENT_UP   = 0;
   public static final int ORIENT_DOWN = 1;
   
-  private double speed;
+  private float speed;
   
   /**
    * Constructs a new laser with color c, length len, and orientation orient.
@@ -32,7 +32,7 @@ public class Laser implements GameObject {
    * @param orient the orientation of the laser
    * @param s the speed of the laser
    */
-  public Laser(Color c, int len, int orient, double s) {
+  public Laser(Color c, int len, int orient, float s) {
     color  = c;
     length = len;
     setOrient(orient);
@@ -45,7 +45,7 @@ public class Laser implements GameObject {
    * to ORIENT_DOWN, and moves the laser off the screen
    */
   public Laser() {
-    this(Color.RED, 10, ORIENT_DOWN, 0.2);
+    this(Color.RED, 10, ORIENT_DOWN, 0.2f);
   }
   
   /**
@@ -99,14 +99,14 @@ public class Laser implements GameObject {
   /**
    * @return the y value of the lasers tip (origY - len)
    */
-  public double getTipY() {
+  public float getTipY() {
     return tipY;
   }
   
   /**
    * @return the x value of the lasers tip (same as origX)
    */
-  public double getTipX() {
+  public float getTipX() {
     return tipX;
   }
   
@@ -134,7 +134,7 @@ public class Laser implements GameObject {
    * @param x the new x value of the laser
    * @param y the new y value of the laser
    */
-  public void setLocation(double x, double y) {
+  public void setLocation(float x, float y) {
     origX = x;
     origY = y;
     assignVertices();

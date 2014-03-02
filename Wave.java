@@ -49,10 +49,10 @@ public class Wave {
     if (debug) {
       g.setColor(Color.BLACK);
       for (int i = 0; i < wave.size(); i++) {
-        int x   = wave.get(i).getCornerX();
-        int y   = wave.get(i).getCornerY();
-        int len = wave.get(i).getLength();
-        g.drawString(i+"", x + (len / 2), y + (len / 2) + (len / 4));
+        float x   = wave.get(i).getCornerX();
+        float y   = wave.get(i).getCornerY();
+        float len = wave.get(i).getLength();
+        g.drawString(i+"", (int)(x + (len / 2)), (int)(y + (len / 2) + (len / 4)));
       }
     }
   }

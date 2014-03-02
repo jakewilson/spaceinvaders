@@ -100,7 +100,7 @@ public class Handler {
    * @return whether they've collided
    */
   private static boolean detectCollision(Laser l, Enemy e) {
-    int x = e.getCornerX(), y = e.getCornerY(), len = e.getLength();
+    float x = e.getCornerX(), y = e.getCornerY(), len = e.getLength();
     if ((x <= l.getTipX() && x + len >= l.getTipX()) &&
         (y <= l.getTipY() && y + len >= l.getTipY())) {
       return true;

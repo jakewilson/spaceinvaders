@@ -14,8 +14,8 @@ public class Enemy implements GameObject {
   private Color color;
   private Laser laser;
   
-  private int cornerX, cornerY; // coordinates of the top left corner of the enemy
-  private int length;
+  private float cornerX, cornerY; // coordinates of the top left corner of the enemy
+  private float length;
   
   public static final int DIRECTION_RIGHT = 0;
   public static final int DIRECTION_DOWN  = 1;
@@ -31,7 +31,7 @@ public class Enemy implements GameObject {
     cornerY = y;
     length  = 20;
     speed   = 3;
-    laser   = new Laser(new Color(0, 150, 255), 10, Laser.ORIENT_DOWN, 0.15);
+    laser   = new Laser(new Color(0, 150, 255), 10, Laser.ORIENT_DOWN, 0.15f);
   }
   
   public Enemy(int x, int y) {
@@ -44,7 +44,7 @@ public class Enemy implements GameObject {
    */
   public void draw(Graphics g) {
     g.setColor(color);
-    g.fillOval(cornerX, cornerY, length, length);
+    g.fillOval((int)cornerX, (int)cornerY, (int)length, (int)length);
     if (shotFired) {
       laser.draw(g);
       if (laser.isOffScreen())
@@ -55,21 +55,21 @@ public class Enemy implements GameObject {
   /**
    * @return the side length of the enemy
    */
-  public int getLength() {
+  public float getLength() {
     return length;
   }
   
   /**
    * @return the x coordinate of the enemy's top left corner
    */
-  public int getCornerX() {
+  public float getCornerX() {
     return cornerX;
   }
   
   /**
    * @return the y coordinate of the enemy's top left corner
    */
-  public int getCornerY() {
+  public float getCornerY() {
     return cornerY;
   }
   

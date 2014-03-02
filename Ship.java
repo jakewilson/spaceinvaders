@@ -14,9 +14,9 @@ public class Ship implements GameObject {
   
   private Color color;
   
-  private int rightX, rightY; // coordinates of the right vertex of the triangle
-  private int leftX , leftY;  // coordinates of the left  vertex of the triangle
-  private int topX  , topY;   // coordinates of the top   vertex of the triangle
+  private float rightX, rightY; // coordinates of the right vertex of the triangle
+  private float leftX , leftY;  // coordinates of the left  vertex of the triangle
+  private float topX  , topY;   // coordinates of the top   vertex of the triangle
   
   private boolean shotFired;  // whether the user has fired a shot
   
@@ -33,7 +33,7 @@ public class Ship implements GameObject {
   public Ship(Color c) {
     color     = c;
     shotFired = false;
-    laser     = new Laser(Color.RED, 20, Laser.ORIENT_UP, 0.4);
+    laser     = new Laser(Color.RED, 20, Laser.ORIENT_UP, 0.4f);
     laser.moveOffScreen();
     this.goToStartingPoint();
   }
@@ -52,8 +52,8 @@ public class Ship implements GameObject {
    */
   public void draw(Graphics g) {
     g.setColor(color);
-    int[] xPoints = {leftX, topX, rightX};
-    int[] yPoints = {leftY, topY, rightY};
+    int[] xPoints = {(int)leftX, (int)topX, (int)rightX};
+    int[] yPoints = {(int)leftY, (int)topY, (int)rightY};
     Polygon p = new Polygon(xPoints, yPoints, 3);
     g.fillPolygon(p);
     g.drawPolygon(p);
