@@ -11,42 +11,18 @@ import java.awt.Graphics;
  */
 public class Laser implements GameObject {
   
-  private Color color;
-  private int   origX, origY;
-  private int   tipX,  tipY;
-  private int   length;
+  private Color  color;
+  private double origX, origY;
+  private double tipX,  tipY;
+  private int    length;
   
   private int orientation; // the orientation in which to draw/move the laser
   
   // possible orientations to draw and move the laser
-  public static final int ORIENT_UP   = -1;
-  public static final int ORIENT_DOWN =  1;
+  public static final int ORIENT_UP   = 0;
+  public static final int ORIENT_DOWN = 1;
   
-  /**
-   * Sets color, x and y coordinates, length, and orient to the parameters
-   * @param c the color of the laser
-   * @param x the x coordinate of the laser
-   * @param y the y coordinate of the laser
-   * @param len the length of the laser
-   * @param orient the orientation of the laser (either ORIENT_UP or ORIENT_DOWN)
-   */
-  public Laser(Color c, int x, int y, int len, int orient) {
-    color       = c;
-    length      = len;
-    setLocation(x, y);
-    setOrient(orient);
-  }
-  
-  /**
-   * No arg constructor. Defaults the color to RED, length to 10, orientation
-   * to ORIENT_DOWN, and moves the laser off the screen
-   */
-  public Laser() {
-    color       = Color.RED;
-    length      = 10;
-    orientation = ORIENT_DOWN;
-    this.moveOffScreen();
-  }
+  private double speed;
   
   /**
    * Constructs a new laser with color c, length len, and orientation orient.
@@ -54,35 +30,23 @@ public class Laser implements GameObject {
    * @param c the color of the laser
    * @param len the length of the laser
    * @param orient the orientation of the laser
+   * @param s the speed of the laser
    */
-  public Laser(Color c, int len, int orient) {
+  public Laser(Color c, int len, int orient, double s) {
     color  = c;
     length = len;
-    this.moveOffScreen();
     setOrient(orient);
+    speed = s;
+    this.moveOffScreen();
   }
   
   /**
-   * Constructs a new laser with location (x, y) and length len.
-   * Defaults color to RED and orientation to ORIENT_DOWN
-   * @param x the x coordinate of the laser
-   * @param y the y coordinate of the laser
-   * @param len the length of the laser
+   * No arg constructor. Defaults the color to RED, length to 10, orientation
+   * to ORIENT_DOWN, and moves the laser off the screen
    */
-  public Laser(int x, int y, int len) {
-    this(Color.RED, x, y, len, ORIENT_DOWN);
+  public Laser() {
+    this(Color.RED, 10, ORIENT_DOWN, 0.2);
   }
-  
-  /**
-   * Constructs a new laser with location (x, y). Sets color to RED, length to 20,
-   * and orientation to ORIENT_DOWN
-   * @param x the x coordinate of the laser
-   * @param y the y coordinate of the laser
-   */
-  public Laser(int x, int y) {
-    this(Color.RED, x, y, 20, ORIENT_DOWN);
-  }
-  
   
   /**
    * Draws the laser and decrements the y value, so every time the laser is drawn it is
@@ -91,14 +55,19 @@ public class Laser implements GameObject {
    */
   public void draw(Graphics g) {
     g.setColor(color);
-    g.drawLine(origX, origY, tipX, tipY);
+    g.drawLine((int)origX, (int)origY, (int)tipX, (int)tipY);
+    this.move();
   }
   
   /**
    * Moves a laser in the direction of it's orientation
    */
   public void move() {
-    this.setLocation(origX, origY + orientation);
+    if (orientation == ORIENT_UP) {
+      this.setLocation(origX, origY - speed);
+    } else if (orientation == ORIENT_DOWN) {
+      this.setLocation(origX, origY + speed);
+    }
   }
   
   /**
@@ -113,7 +82,6 @@ public class Laser implements GameObject {
    * Moves the laser off the screen
    */
   public void moveOffScreen() {
-    System.out.println("Moving off screen");
     this.setLocation(-50, -50);
   }
   
@@ -131,14 +99,14 @@ public class Laser implements GameObject {
   /**
    * @return the y value of the lasers tip (origY - len)
    */
-  public int getTipY() {
+  public double getTipY() {
     return tipY;
   }
   
   /**
    * @return the x value of the lasers tip (same as origX)
    */
-  public int getTipX() {
+  public double getTipX() {
     return tipX;
   }
   
@@ -166,7 +134,7 @@ public class Laser implements GameObject {
    * @param x the new x value of the laser
    * @param y the new y value of the laser
    */
-  public void setLocation(int x, int y) {
+  public void setLocation(double x, double y) {
     origX = x;
     origY = y;
     assignVertices();

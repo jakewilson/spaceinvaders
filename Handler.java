@@ -60,15 +60,10 @@ public class Handler {
       for (int i = 0; i < wave.length(); i++) {
         // if the laser has hit an enemy
         Enemy e = wave.getEnemyAt(i);
-        
-        // move the enemies laser every 30,000 cycles
-        if (counter % 30000 == 0) {
-          e.moveLaser();
-        }
           
         if (detectCollision(hLaser, e)) {
           if (gamePanel.getDebugMode()) {
-            System.out.printf("Laser tip: (%d, %d)\n", hLaser.getTipX(), hLaser.getTipY());
+            System.out.printf("Laser tip: (%f, %f)\n", hLaser.getTipX(), hLaser.getTipY());
             System.out.printf("Enemy corner: (%d, %d) l: %d\n", e.getCornerX(), e.getCornerY(), e.getLength());
           }
           wave.removeEnemyAt(i);
@@ -76,7 +71,9 @@ public class Handler {
         }
       }
       
+      // TODO: do something else here
       if (wave.isEmpty()) {
+        System.out.println("You win!");
         break;
       }
       

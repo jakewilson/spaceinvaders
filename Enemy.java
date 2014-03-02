@@ -31,7 +31,7 @@ public class Enemy implements GameObject {
     cornerY = y;
     length  = 20;
     speed   = 3;
-    laser   = new Laser(new Color(0, 150, 255), 10, Laser.ORIENT_DOWN);
+    laser   = new Laser(new Color(0, 150, 255), 10, Laser.ORIENT_DOWN, 0.15);
   }
   
   public Enemy(int x, int y) {
@@ -121,14 +121,6 @@ public class Enemy implements GameObject {
       laser.setLocation(cornerX + (length / 2), cornerY + length);
       shotFired = true;
     }
-  }
-  
-  /**
-   * Moves a laser if and only if a shot has been fired
-   */
-  public void moveLaser() {
-    if (shotFired)
-      laser.move();
   }
   
   /**

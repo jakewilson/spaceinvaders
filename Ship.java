@@ -33,7 +33,7 @@ public class Ship implements GameObject {
   public Ship(Color c) {
     color     = c;
     shotFired = false;
-    laser     = new Laser(Color.RED, topX, topY, 20, Laser.ORIENT_UP);
+    laser     = new Laser(Color.RED, 20, Laser.ORIENT_UP, 0.4);
     laser.moveOffScreen();
     this.goToStartingPoint();
   }
@@ -59,7 +59,6 @@ public class Ship implements GameObject {
     g.drawPolygon(p);
     if (shotFired) { // if a shot has been fired, draw it on the screen
       laser.draw(g);
-      laser.move();
       if (laser.isOffScreen())
         shotFired = false; // if the laser is off the screen, stop drawing it
     }
