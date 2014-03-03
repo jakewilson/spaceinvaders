@@ -12,7 +12,7 @@ import java.awt.Polygon;
  * @author  Jake Wilson
  * @version Feb 15, 2014
  */
-public class Ship implements GameObject {
+public class Ship {
   
   private Color color;
   

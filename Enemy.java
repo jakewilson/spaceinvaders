@@ -11,7 +11,7 @@ import java.awt.Graphics;
  * @author  Jake Wilson
  * @version Feb 15, 2014
  */
-public class Enemy implements GameObject {
+public class Enemy {
   
   private Color color;
   private Laser laser;

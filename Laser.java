@@ -15,11 +15,11 @@ import java.awt.Graphics;
  * @author  Jake Wilson
  * @version Feb 20, 2014
  */
-public class Laser implements GameObject {
+public class Laser {
   
   private Color  color;
-  private float origX, origY;
-  private float tipX,  tipY;
+  private float  origX, origY;
+  private float  tipX,  tipY;
   private int    length;
   
   private int orientation; // the orientation in which to draw/move the laser
