@@ -22,6 +22,9 @@ public class Wave {
   private int currentDirection;
   private int directionCounter;
   
+  // determines the probability of an enemy firing a laser
+  private final int FIRE_PROB = 40;
+  
   public Wave(int n) {
     wave = new ArrayList<Enemy>(n);
     // draw the enemies in rows of 11
@@ -141,7 +144,7 @@ public class Wave {
   public void fire() {
     for (int i = 0; i < this.length(); i++) {
       Random r = new Random();
-      if (enemyIsInFront(wave.get(i)) && r.nextInt(50) == 0) {
+      if (enemyIsInFront(wave.get(i)) && r.nextInt(FIRE_PROB) == 0) {
         wave.get(i).fireLaser();
       }
     }

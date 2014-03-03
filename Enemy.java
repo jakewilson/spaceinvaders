@@ -156,6 +156,8 @@ public class Enemy {
    * Kills the enemy
    */
   public void kill() {
+    cornerX = -100;
+    cornerY = -100;
     isAlive = false;
   }
   
