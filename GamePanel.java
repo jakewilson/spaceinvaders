@@ -22,6 +22,7 @@ public class GamePanel extends JPanel {
   
   private boolean debugMode;
   private boolean gamePaused;
+  private boolean gameOver;
   
   // the x location of any menu we want to print (gameOver, pause)
   private final int MENU_X = Handler.FRAME_WIDTH / 2 - Handler.FRAME_WIDTH / 10;
@@ -31,6 +32,7 @@ public class GamePanel extends JPanel {
     hero      = new Ship(new Color(255, 154, 0)); // make the ship orange
     wave      = new Wave(44); // TODO: the size should be a variable depending on the level
     debugMode = false;
+    gameOver  = false;
     this.setBackground(Color.BLACK);
     this.setFocusable(true);
     this.addKeyListener(new ShipListener(hero, this));
@@ -51,6 +53,7 @@ public class GamePanel extends JPanel {
         displayPauseMenu(g);
       }
     } else { // if the hero is dead, the game is over
+      gameOver = true;
       displayGameOver(g);
     }
   }
@@ -143,6 +146,13 @@ public class GamePanel extends JPanel {
   public boolean isPaused() {
     return gamePaused;
   }
+  
+  /**
+   * @return whether the game is over or not
+   */
+  public boolean gameIsOver() {
+    return gameOver;
+  }
 
 }
 
@@ -188,6 +198,12 @@ class ShipListener implements KeyListener {
       if (panel.isPaused()) { // enter debug mode
         panel.toggleDebugMode();
       }
+      break;
+    case KeyEvent.VK_Y:
+      if (panel.gameIsOver()) {
+        // TODO: restart the game here
+      }
+      break;
     }
   }
 

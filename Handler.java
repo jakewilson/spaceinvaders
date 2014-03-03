@@ -27,6 +27,8 @@ public class Handler {
   public static final int BORDER_WIDTH  = 18;
   public static final int BORDER_HEIGHT = 38;
   
+  private static boolean gameOver;
+  
   public static void main(String[] args) {
     loadGame();
     runGame();
@@ -36,7 +38,6 @@ public class Handler {
    * Runs the main game loop
    */
   private static void runGame() {
-    gameFrame.setVisible(true);
     int counter = 0; // loop counter
     while (true) { // game loop
       gamePanel.repaint(); // redraw the screen
@@ -45,6 +46,7 @@ public class Handler {
       Laser hLaser = hero.getLaser();
       
       if (!hero.isAlive()) {
+        gameOver = true;
         break;
       }
       
@@ -98,10 +100,12 @@ public class Handler {
   private static void loadGame() {
     gamePanel = new GamePanel();
     gameFrame = new JFrame("Space Invaders");
+    gameOver  = false;
     gameFrame.setSize(FRAME_WIDTH + BORDER_WIDTH, FRAME_HEIGHT + BORDER_HEIGHT);
     gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     gameFrame.setLocationRelativeTo(null);
     gameFrame.add(gamePanel);
+    gameFrame.setVisible(true);
   }
   
   /**
@@ -119,6 +123,7 @@ public class Handler {
     
     return false;
   }
+  
   
   /**
    * Detects collisions between a laser and a ship
