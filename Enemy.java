@@ -153,11 +153,20 @@ public class Enemy {
   }
   
   /**
+   * Sets the location of the enemy to (x, y)
+   * @param x the x coordinate of the enemy
+   * @param y the y coordinate of the enemy
+   */
+  private void setLocation(float x, float y) {
+    cornerX = x;
+    cornerY = y;
+  }
+  
+  /**
    * Kills the enemy
    */
   public void kill() {
-    cornerX = -100;
-    cornerY = -100;
+    setLocation(-100, -100);
     isAlive = false;
   }
   
