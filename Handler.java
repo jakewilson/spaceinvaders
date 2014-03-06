@@ -30,7 +30,7 @@ public class Handler {
   public static void main(String[] args) {
     loadGame();
     runGame();
-    System.out.println("in main...?");
+    gameFrame.dispose(); // clean up and stop execution
   }
   
   /**

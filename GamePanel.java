@@ -234,7 +234,6 @@ class ShipListener implements KeyListener {
     case KeyEvent.VK_N: // quit the game
       if (panel.gameIsOver()) {
         panel.quitGame();
-        System.out.println("quitting...");
       }
       break;
     }
