@@ -27,11 +27,10 @@ public class Handler {
   public static final int BORDER_WIDTH  = 18;
   public static final int BORDER_HEIGHT = 38;
   
-  private static boolean gameOver;
-  
   public static void main(String[] args) {
     loadGame();
     runGame();
+    System.out.println("in main...?");
   }
   
   /**
@@ -39,16 +38,11 @@ public class Handler {
    */
   private static void runGame() {
     int counter = 0; // loop counter
-    while (true) { // game loop
+    while (gamePanel.keepRunning()) { // game loop
       gamePanel.repaint(); // redraw the screen
       Ship hero    = gamePanel.getHero();
       Wave wave    = gamePanel.getWave();
       Laser hLaser = hero.getLaser();
-      
-      if (!hero.isAlive()) {
-        gameOver = true;
-        break;
-      }
       
       // TODO: the '500000' needs to be a variable dependent on how many enemies
       //       are left on the screen. The less enemies are left, the faster they move,
@@ -79,11 +73,10 @@ public class Handler {
         // check for collisions between the enemies lasers and the ship
         if (detectCollision(e.getLaser(), hero) || detectCollision(hero, e)) {
           hero.kill();
-          break;
         }
       }
       
-      // TODO: do something else here
+      // TODO: implement gameWon var in panel to print game won screen
       if (wave.isEmpty()) {
         System.out.println("You win!");
         break;
@@ -99,7 +92,6 @@ public class Handler {
   private static void loadGame() {
     gamePanel = new GamePanel();
     gameFrame = new JFrame("Space Invaders");
-    gameOver  = false;
     gameFrame.setSize(FRAME_WIDTH + BORDER_WIDTH, FRAME_HEIGHT + BORDER_HEIGHT);
     gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     gameFrame.setLocationRelativeTo(null);

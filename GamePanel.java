@@ -20,22 +20,34 @@ public class GamePanel extends JPanel {
   private Ship hero; // the ship the user will play as
   private Wave wave; // the wave of enemies the user will fight
   
+  private ShipListener listener; // the panels key listener
+  
   private boolean debugMode;
   private boolean gamePaused;
   private boolean gameOver;
+  private boolean quitGame;
   
   // the x location of any menu we want to print (gameOver, pause)
   private final int MENU_X = Handler.FRAME_WIDTH / 2 - Handler.FRAME_WIDTH / 10;
   
   public GamePanel() {
     super();
-    hero      = new Ship(new Color(255, 154, 0)); // make the ship orange
-    wave      = new Wave(44); // TODO: the size should be a variable depending on the level
+    restartGame(); // init game objects
     debugMode = false;
-    gameOver  = false;
     this.setBackground(Color.BLACK);
     this.setFocusable(true);
-    this.addKeyListener(new ShipListener(hero, this));
+  }
+  
+  /**
+   * Restarts the game
+   */
+  public void restartGame() {
+    hero       = new Ship(new Color(255, 154, 0)); // make the ship orange
+    wave       = new Wave(44); // TODO: the size should be a variable depending on the level
+    gameOver   = false;
+    gamePaused = false;
+    listener  = new ShipListener(hero, this);
+    this.addKeyListener(listener);
   }
   
   protected void paintComponent(Graphics g) {
@@ -153,6 +165,21 @@ public class GamePanel extends JPanel {
   public boolean gameIsOver() {
     return gameOver;
   }
+  
+  /**
+   * Signals to the Handler whether to continue running the game
+   * @return whether the keep running the game or not
+   */
+  public boolean keepRunning() {
+    return !quitGame;
+  }
+  
+  /**
+   * Sets quitGame to true
+   */
+  public void quitGame() {
+    quitGame = true;
+  }
 
 }
 
@@ -199,9 +226,15 @@ class ShipListener implements KeyListener {
         panel.toggleDebugMode();
       }
       break;
-    case KeyEvent.VK_Y:
+    case KeyEvent.VK_Y: // restart the game
       if (panel.gameIsOver()) {
-        // TODO: restart the game here
+        panel.restartGame();
+      }
+      break;
+    case KeyEvent.VK_N: // quit the game
+      if (panel.gameIsOver()) {
+        panel.quitGame();
+        System.out.println("quitting...");
       }
       break;
     }
