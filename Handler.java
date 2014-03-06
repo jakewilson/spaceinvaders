@@ -66,8 +66,7 @@ public class Handler {
       for (int i = 0; i < wave.length(); i++) {
         // if the laser has hit an enemy
         Enemy e = wave.getEnemyAt(i);
-          
-        // TODO: we don't want to remove the laser after an enemy has died
+        
         if (detectCollision(hLaser, e)) { // check for collisions between the enemies and ships laser
           if (gamePanel.getDebugMode()) {
             System.out.printf("Laser tip: (%f, %f)\n", hLaser.getTipX(), hLaser.getTipY());
@@ -78,7 +77,7 @@ public class Handler {
         }
         
         // check for collisions between the enemies lasers and the ship
-        if (detectCollision(e.getLaser(), hero)) {
+        if (detectCollision(e.getLaser(), hero) || detectCollision(hero, e)) {
           hero.kill();
           break;
         }
@@ -116,6 +115,7 @@ public class Handler {
    */
   private static boolean detectCollision(Laser l, Enemy e) {
     float x = e.getCornerX(), y = e.getCornerY(), len = e.getLength();
+    
     if ((x <= l.getTipX() && x + len >= l.getTipX()) &&
         (y <= l.getTipY() && y + len >= l.getTipY())) {
       return true;
@@ -135,8 +135,31 @@ public class Handler {
     float lX = s.getLeftX() , lY = s.getLeftY();
     float rX = s.getRightX(), rY = s.getRightY();
     float tX = s.getTopX()  , tY = s.getTopY();
+    
     if ((lX <= l.getTipX() && rX >= l.getTipX()) &&
         (tY <= l.getTipY() && lY >= l.getTipY())) {
+      return true;
+    }
+    
+    return false;
+  }
+  
+  /**
+   * Detects a collision between a ship and an enemy
+   * @param s the ship
+   * @param e the enemy
+   * @return whether they've collided
+   */
+  private static boolean detectCollision(Ship s, Enemy e) {
+    float lX  = s.getLeftX()  , lY = s.getLeftY();
+    float rX  = s.getRightX() , rY = s.getRightY();
+    float tX  = s.getTopX()   , tY = s.getTopY();
+    float eX  = e.getCornerX(), eY = e.getCornerY();
+    float len = e.getLength();
+    
+    if ((eX >= lX && (eX <= rX)) &&
+        ((eY + len) >= tY && (eY + len) <= lY)) {
+      System.out.println("Enemy hit ship");
       return true;
     }
     

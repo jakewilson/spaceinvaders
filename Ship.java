@@ -36,7 +36,7 @@ public class Ship {
   public Ship(Color c) {
     color     = c;
     shotFired = false;
-    laser     = new Laser(Color.RED, 20, Laser.ORIENT_UP, 0.4f);
+    laser     = new Laser(Color.RED, 20, Laser.ORIENT_UP, 0.5f);
     isAlive   = true;
     laser.moveOffScreen();
     this.goToStartingPoint();
