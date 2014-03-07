@@ -44,7 +44,7 @@ public class GamePanel extends JPanel {
    */
   public void restartGame() {
     hero       = new Ship(new Color(255, 154, 0)); // make the ship orange
-    wave       = new Wave(4); // TODO: the size should be a variable depending on the level
+    wave       = new Wave(44); // TODO: the size should be a variable depending on the level
     gameOver   = false;
     gamePaused = false;
     gameWon    = false;

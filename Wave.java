@@ -54,7 +54,7 @@ public class Wave {
       // if the enemy is dead and its laser is off the screen, remove it from the wave
       if (!wave.get(i).isAlive() && wave.get(i).getLaser().isOffScreen()) {
         removeEnemyAt(i);
-        break;
+        continue;
       }
       
       wave.get(i).draw(g);
