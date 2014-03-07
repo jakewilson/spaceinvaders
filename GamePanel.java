@@ -168,7 +168,6 @@ public class GamePanel extends JPanel {
    * Toggles the pause state. If the game is paused, it is unpaused and vice versa
    */
   public void togglePause() {
-    System.out.println("toggling pause");
     gamePaused = !gamePaused;
   }
   
