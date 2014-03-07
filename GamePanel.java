@@ -26,6 +26,7 @@ public class GamePanel extends JPanel {
   private boolean gamePaused;
   private boolean gameOver;
   private boolean quitGame;
+  private boolean gameWon;
   
   // the x location of any menu we want to print (gameOver, pause)
   private final int MENU_X = Handler.FRAME_WIDTH / 2 - Handler.FRAME_WIDTH / 10;
@@ -43,16 +44,20 @@ public class GamePanel extends JPanel {
    */
   public void restartGame() {
     hero       = new Ship(new Color(255, 154, 0)); // make the ship orange
-    wave       = new Wave(44); // TODO: the size should be a variable depending on the level
+    wave       = new Wave(4); // TODO: the size should be a variable depending on the level
     gameOver   = false;
     gamePaused = false;
-    listener  = new ShipListener(hero, this);
+    gameWon    = false;
+    if (this.getKeyListeners().length == 1) { // if the panel already has a key listener, remove it before adding a new one
+      this.removeKeyListener(listener);
+    }
+    listener   = new ShipListener(hero, this);
     this.addKeyListener(listener);
   }
   
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
-    if (hero.isAlive()) {
+    if (hero.isAlive() && !gameWon) {
       if (!gamePaused) {
         if (debugMode) {
           drawGrid(g);
@@ -64,10 +69,24 @@ public class GamePanel extends JPanel {
       } else { // display pause menu
         displayPauseMenu(g);
       }
-    } else { // if the hero is dead, the game is over
+    } else if (!hero.isAlive()) {
       gameOver = true;
       displayGameOver(g);
+    } else if (gameWon) {
+      displayGameWon(g);
     }
+  }
+  
+  /**
+   * Draws the game won screen
+   * @param g the graphics context to draw on
+   */
+  private void displayGameWon(Graphics g) {
+    g.setColor(Color.WHITE);
+    g.setFont(new Font("Courier New", Font.PLAIN, 14));
+    String msg = "You've defeated the wave of enemies!";
+    g.drawString(msg                , MENU_X - 20, Handler.FRAME_HEIGHT / 2 - 60);
+    g.drawString("Play again (y/n)?", MENU_X - 20, Handler.FRAME_HEIGHT / 2 - 40);
   }
   
   /**
@@ -149,6 +168,7 @@ public class GamePanel extends JPanel {
    * Toggles the pause state. If the game is paused, it is unpaused and vice versa
    */
   public void togglePause() {
+    System.out.println("toggling pause");
     gamePaused = !gamePaused;
   }
   
@@ -179,6 +199,22 @@ public class GamePanel extends JPanel {
    */
   public void quitGame() {
     quitGame = true;
+  }
+  
+  /**
+   * @return whether the user has defeated all of the enemies or not
+   */
+  public boolean gameIsWon() {
+    return gameWon;
+  }
+  
+  /**
+   * Sets gameWon to b
+   * TODO: think of a better method name for this...setGameWon() is stupid
+   * @param b the new gameWon value
+   */
+  public void setGameWon(boolean b) {
+    gameWon = b;
   }
 
 }
@@ -227,12 +263,12 @@ class ShipListener implements KeyListener {
       }
       break;
     case KeyEvent.VK_Y: // restart the game
-      if (panel.gameIsOver()) {
+      if (panel.gameIsOver() || panel.gameIsWon()) {
         panel.restartGame();
       }
       break;
     case KeyEvent.VK_N: // quit the game
-      if (panel.gameIsOver()) {
+      if (panel.gameIsOver() || panel.gameIsWon()) {
         panel.quitGame();
       }
       break;

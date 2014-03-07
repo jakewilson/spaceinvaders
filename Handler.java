@@ -61,25 +61,26 @@ public class Handler {
         // if the laser has hit an enemy
         Enemy e = wave.getEnemyAt(i);
         
-        if (detectCollision(hLaser, e)) { // check for collisions between the enemies and ships laser
-          if (gamePanel.getDebugMode()) {
-            System.out.printf("Laser tip: (%f, %f)\n", hLaser.getTipX(), hLaser.getTipY());
-            System.out.printf("Enemy corner: (%f, %f) l: %f\n", e.getCornerX(), e.getCornerY(), e.getLength());
+        if (e != null) {
+          if (detectCollision(hLaser, e)) { // check for collisions between the enemies and ships laser
+            if (gamePanel.getDebugMode()) {
+              System.out.printf("Laser tip: (%f, %f)\n", hLaser.getTipX(), hLaser.getTipY());
+              System.out.printf("Enemy corner: (%f, %f) l: %f\n", e.getCornerX(), e.getCornerY(), e.getLength());
+            }
+            wave.killEnemyAt(i);
+            hero.returnLaser();
           }
-          wave.killEnemyAt(i);
-          hero.returnLaser();
+          
+          // check for collisions between the enemies lasers with the ship and the ship with the enemies
+          if (detectCollision(e.getLaser(), hero) || detectCollision(hero, e)) {
+            hero.kill();
+          }
         }
         
-        // check for collisions between the enemies lasers and the ship
-        if (detectCollision(e.getLaser(), hero) || detectCollision(hero, e)) {
-          hero.kill();
-        }
       }
       
-      // TODO: implement gameWon var in panel to print game won screen
       if (wave.isEmpty()) {
-        System.out.println("You win!");
-        break;
+        gamePanel.setGameWon(true);
       }
       
     }
