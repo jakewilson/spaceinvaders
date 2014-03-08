@@ -55,7 +55,8 @@ public class GamePanel extends JPanel {
     gamePaused = false;
     gameWon    = false;
     score      = 0;
-    if (this.getKeyListeners().length == 1) { // if the panel already has a key listener, remove it before adding a new one
+    // if the panel already has a key listener, remove it before adding a new one
+    if (this.getKeyListeners().length == 1) {
       this.removeKeyListener(listener);
     }
     listener   = new ShipListener(hero, this);
@@ -236,7 +237,7 @@ public class GamePanel extends JPanel {
    * Updates the score depending on how many enemies remain in the wave
    */
   public void updateScore() {
-    score = (44 - wave.length()) * 10;
+    score = (44 - wave.amountOfEnemiesAlive()) * 10;
   }
 
 }

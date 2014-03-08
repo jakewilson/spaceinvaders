@@ -57,7 +57,7 @@ public class Wave {
         continue;
       }
       
-      wave.get(i).draw(g);
+      wave.get(i).draw(g); // draw each enemy
     }
     
     if (debug) {
@@ -91,7 +91,7 @@ public class Wave {
   }
   
   /**
-   * Removes an enemy at the specified index from the ArrayList
+   * Removes an enemy at the specified index from the wave
    * @param index the index at which to remove an enemy
    */
   public void removeEnemyAt(int index) {
@@ -174,6 +174,21 @@ public class Wave {
    */
   public boolean isEmpty() {
     return this.length() == 0;
+  }
+  
+  /**
+   * @return the number of enemies still alive
+   */
+  public int amountOfEnemiesAlive() {
+    int count = 0;
+    for (int i = 0; i < this.length(); i++) {
+      Enemy e = this.getEnemyAt(i);
+      if (e != null && e.isAlive()) {
+        count++;
+      }
+    }
+    
+    return count;
   }
   
   /**
