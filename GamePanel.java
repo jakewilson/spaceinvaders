@@ -3,7 +3,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.BitSet;
 
 import javax.swing.JPanel;
 
@@ -28,6 +27,8 @@ public class GamePanel extends JPanel {
   private boolean quitGame;
   private boolean gameWon;
   
+  private int score;
+  
   // the x location of any menu we want to print (gameOver, pause)
   private final int MENU_X = Handler.FRAME_WIDTH / 2 - Handler.FRAME_WIDTH / 10;
   
@@ -40,7 +41,7 @@ public class GamePanel extends JPanel {
   }
   
   /**
-   * Restarts the game
+   * (Re)starts the game
    */
   public void restartGame() {
     hero       = new Ship(new Color(255, 154, 0)); // make the ship orange
@@ -48,6 +49,7 @@ public class GamePanel extends JPanel {
     gameOver   = false;
     gamePaused = false;
     gameWon    = false;
+    score      = 0;
     if (this.getKeyListeners().length == 1) { // if the panel already has a key listener, remove it before adding a new one
       this.removeKeyListener(listener);
     }
@@ -65,6 +67,7 @@ public class GamePanel extends JPanel {
         } else {
           wave.draw(g);
         }
+        drawScore(g);
         hero.draw(g);
       } else { // display pause menu
         displayPauseMenu(g);
@@ -75,6 +78,17 @@ public class GamePanel extends JPanel {
     } else if (gameWon) {
       displayGameWon(g);
     }
+  }
+  
+
+  /**
+   * Draws the score at the top of the screen
+   * @param g the graphics context to draw on
+   */
+  private void drawScore(Graphics g) {
+    g.setColor(Color.RED);
+    g.setFont(new Font("Courier New", Font.PLAIN, 14));
+    g.drawString("Score: " + score, MENU_X, 30);
   }
   
   /**
@@ -215,6 +229,13 @@ public class GamePanel extends JPanel {
    */
   public void setGameWon(boolean b) {
     gameWon = b;
+  }
+  
+  /**
+   * Updates the score depending on how many enemies remain in the wave
+   */
+  public void updateScore() {
+    score = (44 - wave.length()) * 10;
   }
 
 }

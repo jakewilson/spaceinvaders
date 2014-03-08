@@ -29,7 +29,7 @@ public class Wave {
     wave = new ArrayList<Enemy>(n);
     // draw the enemies in rows of 11
     for (int i = 0; i < n; i++) {
-      wave.add(i, (new Enemy(Color.GREEN, 30 + (50 * (i % 11)), 30 + (i / 11 * 50))));
+      wave.add(i, (new Enemy(Color.GREEN, 30 + (50 * (i % 11)), 60 + (i / 11 * 50))));
     }
     currentDirection = Enemy.DIRECTION_RIGHT;
     directionCounter = 0;

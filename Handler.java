@@ -40,6 +40,7 @@ public class Handler {
     int counter = 0; // loop counter
     while (gamePanel.keepRunning()) { // game loop
       gamePanel.repaint(); // redraw the screen
+      gamePanel.updateScore();
       Ship hero    = gamePanel.getHero();
       Wave wave    = gamePanel.getWave();
       Laser hLaser = hero.getLaser();
