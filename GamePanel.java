@@ -27,6 +27,8 @@ public class GamePanel extends JPanel {
   private boolean quitGame;
   private boolean gameWon;
   
+  private Font gameFont;
+  
   private int score;
   
   // the x location of any menu we want to print (gameOver, pause)
@@ -36,8 +38,11 @@ public class GamePanel extends JPanel {
     super();
     restartGame(); // init game objects
     debugMode = false;
+    gameFont  = new Font("Courier New", Font.PLAIN, 14);
+    this.setFont(gameFont);
     this.setBackground(Color.BLACK);
     this.setFocusable(true);
+    this.validate();
   }
   
   /**
@@ -87,7 +92,6 @@ public class GamePanel extends JPanel {
    */
   private void drawScore(Graphics g) {
     g.setColor(Color.RED);
-    g.setFont(new Font("Courier New", Font.PLAIN, 14));
     g.drawString("Score: " + score, MENU_X, 30);
   }
   
@@ -97,7 +101,6 @@ public class GamePanel extends JPanel {
    */
   private void displayGameWon(Graphics g) {
     g.setColor(Color.WHITE);
-    g.setFont(new Font("Courier New", Font.PLAIN, 14));
     String msg = "You've defeated the wave of enemies!";
     g.drawString(msg                , MENU_X - 20, Handler.FRAME_HEIGHT / 2 - 60);
     g.drawString("Play again (y/n)?", MENU_X - 20, Handler.FRAME_HEIGHT / 2 - 40);
@@ -109,7 +112,6 @@ public class GamePanel extends JPanel {
    */
   private void displayGameOver(Graphics g) {
     g.setColor(Color.WHITE);
-    g.setFont(new Font("Courier New", Font.PLAIN, 14));
     g.drawString("Game Over"        , MENU_X, Handler.FRAME_HEIGHT / 2 - 60);
     g.drawString("Play Again (y/n)?", MENU_X, Handler.FRAME_HEIGHT / 2 - 40);
   }
@@ -120,7 +122,6 @@ public class GamePanel extends JPanel {
    */
   private void displayPauseMenu(Graphics g) {
     g.setColor(Color.WHITE);
-    g.setFont(new Font("Courier New", Font.PLAIN, 14));
     String debugString = "";
     g.drawString("Game Paused"   , MENU_X, Handler.FRAME_HEIGHT / 2 - 60);
     g.drawString("[p] To Unpause", MENU_X, Handler.FRAME_HEIGHT / 2 - 40);
@@ -293,7 +294,7 @@ class ShipListener implements KeyListener {
         panel.quitGame();
       }
       break;
-    case KeyEvent.VK_Q:
+    case KeyEvent.VK_Q: // quit the game from the pause menu
       if (panel.isPaused()) {
         panel.quitGame();
       }

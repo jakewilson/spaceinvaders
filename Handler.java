@@ -94,10 +94,11 @@ public class Handler {
   private static void loadGame() {
     gamePanel = new GamePanel();
     gameFrame = new JFrame("Space Invaders");
-    gameFrame.setSize(FRAME_WIDTH + BORDER_WIDTH, FRAME_HEIGHT + BORDER_HEIGHT);
     gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    gameFrame.setLocationRelativeTo(null);
     gameFrame.add(gamePanel);
+    gameFrame.setSize(FRAME_WIDTH + BORDER_WIDTH, FRAME_HEIGHT + BORDER_HEIGHT);
+    gameFrame.setLocationRelativeTo(null);
+    gameFrame.validate();
     gameFrame.setVisible(true);
   }
   
