@@ -116,6 +116,7 @@ public class GamePanel extends JPanel {
       debugString = "[d] To Enter Debug Mode";
     }
     g.drawString(debugString, MENU_X, Handler.FRAME_HEIGHT / 2 - 20);
+    g.drawString("[q] To quit", MENU_X, Handler.FRAME_HEIGHT / 2);
   }
   
   /**
@@ -268,6 +269,11 @@ class ShipListener implements KeyListener {
       break;
     case KeyEvent.VK_N: // quit the game
       if (panel.gameIsOver() || panel.gameIsWon()) {
+        panel.quitGame();
+      }
+      break;
+    case KeyEvent.VK_Q:
+      if (panel.isPaused()) {
         panel.quitGame();
       }
       break;
