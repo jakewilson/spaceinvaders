@@ -50,16 +50,13 @@ public class Wave {
    * @param debug whether to draw the debug content as well
    */
   public void draw(Graphics g, boolean debug) {
+    cleanupWave();
+    
     for (int i = 0; i < wave.size(); i++) {
-      // if the enemy is dead and its laser is off the screen, remove it from the wave
-      if (!wave.get(i).isAlive() && wave.get(i).getLaser().isOffScreen()) {
-        removeEnemyAt(i);
-        continue;
-      }
-      
       wave.get(i).draw(g); // draw each enemy
     }
     
+    // draw each enemies index on the enemy
     if (debug) {
       g.setColor(Color.BLACK);
       for (int i = 0; i < wave.size(); i++) {
@@ -69,6 +66,13 @@ public class Wave {
         g.drawString(i+"", (int)(x + (len / 2)), (int)(y + (len / 2) + (len / 4)));
       }
     }
+  }
+  
+  private void cleanupWave() {
+    for (int i = 0; i < wave.size(); i++)
+      // if the enemy is dead and its laser is off the screen, remove it from the wave
+      if (!wave.get(i).isAlive() && wave.get(i).getLaser().isOffScreen())
+        removeEnemyAt(i);
   }
   
   /**
