@@ -27,8 +27,6 @@ public class GamePanel extends JPanel {
   private boolean quitGame;
   private boolean gameWon;
   
-  private Font gameFont;
-  
   private int score;
   
   // the x location of any menu we want to print (gameOver, pause)
@@ -38,8 +36,7 @@ public class GamePanel extends JPanel {
     super();
     restartGame(); // init game objects
     debugMode = false;
-    gameFont  = new Font("Courier New", Font.PLAIN, 14);
-    this.setFont(gameFont);
+    this.setFont(new Font("Courier New", Font.PLAIN, 14));
     this.setBackground(Color.BLACK);
     this.setFocusable(true);
     this.validate();

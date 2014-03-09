@@ -80,7 +80,7 @@ public class Handler {
         
       }
       
-      if (wave.isEmpty()) {
+      if (wave.amountOfEnemiesAlive() == 0) {
         gamePanel.setGameWon(true);
       }
       
