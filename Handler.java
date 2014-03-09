@@ -30,7 +30,6 @@ public class Handler {
   public static void main(String[] args) {
     loadGame();
     runGame();
-    gameFrame.dispose(); // clean up and stop execution
   }
   
   /**
@@ -85,6 +84,8 @@ public class Handler {
       }
       
     }
+    
+    gameFrame.dispose(); // clean up and stop execution
   }
   
   

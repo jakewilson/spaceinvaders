@@ -100,6 +100,7 @@ public class GamePanel extends JPanel {
   private void displayGameWon(Graphics g) {
     g.setColor(Color.WHITE);
     String msg = "You've defeated the wave of enemies!";
+    g.drawString("Score: " + score  , MENU_X - 20, Handler.FRAME_HEIGHT / 2 - 80);
     g.drawString(msg                , MENU_X - 20, Handler.FRAME_HEIGHT / 2 - 60);
     g.drawString("Play again (y/n)?", MENU_X - 20, Handler.FRAME_HEIGHT / 2 - 40);
   }
@@ -110,7 +111,8 @@ public class GamePanel extends JPanel {
    */
   private void displayGameOver(Graphics g) {
     g.setColor(Color.WHITE);
-    g.drawString("Game Over"        , MENU_X, Handler.FRAME_HEIGHT / 2 - 60);
+    g.drawString("Game Over"        , MENU_X, Handler.FRAME_HEIGHT / 2 - 80);
+    g.drawString("Score: " + score  , MENU_X, Handler.FRAME_HEIGHT / 2 - 60);
     g.drawString("Play Again (y/n)?", MENU_X, Handler.FRAME_HEIGHT / 2 - 40);
   }
   
@@ -121,15 +123,16 @@ public class GamePanel extends JPanel {
   private void displayPauseMenu(Graphics g) {
     g.setColor(Color.WHITE);
     String debugString = "";
-    g.drawString("Game Paused"   , MENU_X, Handler.FRAME_HEIGHT / 2 - 60);
-    g.drawString("[p] To Unpause", MENU_X, Handler.FRAME_HEIGHT / 2 - 40);
+    g.drawString("Game Paused"    , MENU_X, Handler.FRAME_HEIGHT / 2 - 60);
+    g.drawString("Score: " + score, MENU_X, Handler.FRAME_HEIGHT / 2 - 40);
+    g.drawString("[p] To Unpause" , MENU_X, Handler.FRAME_HEIGHT / 2 - 20);
     if (debugMode) {
       debugString = "[d] To Leave Debug Mode";
     } else {
       debugString = "[d] To Enter Debug Mode";
     }
-    g.drawString(debugString, MENU_X, Handler.FRAME_HEIGHT / 2 - 20);
-    g.drawString("[q] To quit", MENU_X, Handler.FRAME_HEIGHT / 2);
+    g.drawString(debugString, MENU_X, Handler.FRAME_HEIGHT / 2);
+    g.drawString("[q] To quit", MENU_X, Handler.FRAME_HEIGHT / 2 + 20);
   }
   
   /**
