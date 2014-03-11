@@ -44,14 +44,15 @@ public class Handler {
       Wave wave    = gamePanel.getWave();
       Laser hLaser = hero.getLaser();
       
-      // TODO: the '500000' needs to be a variable dependent on how many enemies
-      //       are left on the screen. The less enemies are left, the faster they move,
-      //       which means the counter should have less and less value
       if (!gamePanel.isPaused()) { // only move the enemies if the game is not paused
-        if (counter++ % 500000 == 0) {
+        if (counter % (50000 + (wave.amountOfEnemiesAlive() * 10000)) == 0) {
           wave.advance();
+        }
+        
+        if (counter++ % 500000 == 0) {
           wave.fire(); // fire lasers from enemies in the front randomly
         }
+        
         // check if the laser has collided with an enemy
         for (int i = 0; i < wave.length(); i++) {
           // if the laser has hit an enemy
