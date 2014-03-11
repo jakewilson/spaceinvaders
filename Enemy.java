@@ -25,7 +25,7 @@ public class Enemy {
   public static final int DIRECTION_DOWN  = 1;
   public static final int DIRECTION_LEFT  = 2;
   
-  private final float speed = 2f;  // the speed at which the enemy moves
+  private final float speed = 3f;  // the speed at which the enemy moves
   
   private boolean shotFired;
 

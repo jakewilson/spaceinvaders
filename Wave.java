@@ -68,6 +68,11 @@ public class Wave {
     }
   }
   
+  /**
+   * Determines if an enemy should be removed, and if so, removes it
+   * @param e the enemy to possibly remove
+   * @return whether the enemy was removed
+   */
   private boolean cleanUp(Enemy e) {
     if (!e.isAlive() && e.getLaser().isOffScreen()) {
       this.removeEnemy(e);

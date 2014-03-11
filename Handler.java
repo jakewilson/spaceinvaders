@@ -45,7 +45,7 @@ public class Handler {
       Laser hLaser = hero.getLaser();
       
       if (!gamePanel.isPaused()) { // only move the enemies if the game is not paused
-        if (counter % (50000 + (wave.amountOfEnemiesAlive() * 10000)) == 0) {
+        if (counter % (30000 + (wave.amountOfEnemiesAlive() * 10000)) == 0) {
           wave.advance();
         }
         
