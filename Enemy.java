@@ -86,6 +86,8 @@ public class Enemy {
    * @return whether the enemy has room in <code>direction</code>
    */
   public boolean hasRoom(int direction) {
+    if (this.isOffScreen()) return true; // if the enemy is off screen, the wave should continue to move
+    
     switch (direction) {
     case DIRECTION_RIGHT:
       return (((cornerX + length) + speed) < Handler.FRAME_WIDTH - 10);
@@ -168,6 +170,13 @@ public class Enemy {
   public void kill() {
     setLocation(-100, -100);
     isAlive = false;
+  }
+  
+  /**
+   * @return whether the enemy is off the screen
+   */
+  public boolean isOffScreen() {
+    return cornerX < 0 && cornerY < 0;
   }
   
 }
