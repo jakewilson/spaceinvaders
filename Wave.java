@@ -50,9 +50,9 @@ public class Wave {
    * @param debug whether to draw the debug content as well
    */
   public void draw(Graphics g, boolean debug) {
-    cleanupWave();
     
     for (int i = 0; i < wave.size(); i++) {
+      if (cleanUp(wave.get(i))) continue;
       wave.get(i).draw(g); // draw each enemy
     }
     
@@ -68,11 +68,13 @@ public class Wave {
     }
   }
   
-  private void cleanupWave() {
-    for (int i = 0; i < wave.size(); i++)
-      // if the enemy is dead and its laser is off the screen, remove it from the wave
-      if (!wave.get(i).isAlive() && wave.get(i).getLaser().isOffScreen())
-        removeEnemyAt(i);
+  private boolean cleanUp(Enemy e) {
+    if (!e.isAlive() && e.getLaser().isOffScreen()) {
+      this.removeEnemy(e);
+      return true;
+    }
+    
+    return false;
   }
   
   /**
@@ -101,6 +103,14 @@ public class Wave {
   public void removeEnemyAt(int index) {
     if (index >= 0 && index < wave.size())
       wave.remove(index);
+  }
+  
+  /**
+   * Removes an enemy from the wave
+   * @param e the enemy to remove
+   */
+  public void removeEnemy(Enemy e) {
+    wave.remove(e);
   }
   
   /**
