@@ -52,36 +52,33 @@ public class Handler {
           wave.advance();
           wave.fire(); // fire lasers from enemies in the front randomly
         }
-      }
-      
-      
-      
-      // check if the laser has collided with an enemy
-      for (int i = 0; i < wave.length(); i++) {
-        // if the laser has hit an enemy
-        Enemy e = wave.getEnemyAt(i);
-        
-        if (e != null) {
-          if (detectCollision(hLaser, e)) { // check for collisions between the enemies and ships laser
-            if (gamePanel.getDebugMode()) {
-              System.out.printf("Laser tip: (%f, %f)\n", hLaser.getTipX(), hLaser.getTipY());
-              System.out.printf("Enemy corner: (%f, %f) l: %f\n", e.getCornerX(), e.getCornerY(), e.getLength());
+        // check if the laser has collided with an enemy
+        for (int i = 0; i < wave.length(); i++) {
+          // if the laser has hit an enemy
+          Enemy e = wave.getEnemyAt(i);
+          
+          if (e != null) {
+            if (detectCollision(hLaser, e)) { // check for collisions between the enemies and ships laser
+              if (gamePanel.getDebugMode()) {
+                System.out.printf("Laser tip: (%f, %f)\n", hLaser.getTipX(), hLaser.getTipY());
+                System.out.printf("Enemy corner: (%f, %f) l: %f\n", e.getCornerX(), e.getCornerY(), e.getLength());
+              }
+              wave.killEnemyAt(i);
+              hero.returnLaser();
             }
-            wave.killEnemyAt(i);
-            hero.returnLaser();
+            
+            // check for collisions between the enemies lasers with the ship and the ship with the enemies
+            if (detectCollision(e.getLaser(), hero) || detectCollision(hero, e)) {
+              hero.kill();
+            }
           }
           
-          // check for collisions between the enemies lasers with the ship and the ship with the enemies
-          if (detectCollision(e.getLaser(), hero) || detectCollision(hero, e)) {
-            hero.kill();
-          }
         }
         
-      }
-      
-      if (wave.amountOfEnemiesAlive() == 0) {
-        gamePanel.setGameWon(true);
-      }
+        if (wave.amountOfEnemiesAlive() == 0) {
+          gamePanel.setGameWon(true);
+        }
+      } // end if (gamePanel.isPaused())
       
     }
     
