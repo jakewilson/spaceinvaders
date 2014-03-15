@@ -261,7 +261,7 @@ class ShipListener implements KeyListener {
   }
 
   public void keyPressed(KeyEvent ke) {
-    switch (ke.getExtendedKeyCode()) {
+    switch (ke.getKeyCode()) {
     case KeyEvent.VK_RIGHT: // move the ship to the right
       if (!panel.isPaused()) {
         ship.move(ship.DIRECTION_RIGHT);
