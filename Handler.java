@@ -32,6 +32,8 @@ public class Handler {
   
   /**
    * Runs the main game loop
+   * TODO: this could be made much more efficient I think by only repainting whenever the wave advances, or the enemy/laser is moved.
+   *       All other calls to repaint are superfluous
    */
   private static void runGame() {
     int counter = 0; // loop counter
@@ -97,6 +99,10 @@ public class Handler {
     gameFrame.setLocationRelativeTo(null);
     gameFrame.validate();
     gameFrame.setVisible(true);
+    gamePanel.repaint();
+    int uselessCounter = 0;
+    // TODO: ask on SO if this is due to compiler optimization
+    while (!gamePanel.gameHasStarted() && ++uselessCounter >= 0); // wait until the game has started to run it
   }
   
   /**

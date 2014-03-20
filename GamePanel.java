@@ -24,6 +24,7 @@ public class GamePanel extends JPanel {
   private boolean debugMode;
   private boolean gamePaused;
   private boolean gameOver;
+  private boolean gameStarted;
   private boolean quitGame;
   private boolean gameWon;
   
@@ -31,11 +32,13 @@ public class GamePanel extends JPanel {
   
   // the x location of any menu we want to print (gameOver, pause)
   private final int MENU_X = Handler.FRAME_WIDTH / 2 - Handler.FRAME_WIDTH / 10;
+  private final int MENU_Y = Handler.FRAME_HEIGHT / 2; // the middle of the screen
   
   public GamePanel() {
     super();
     restartGame(); // init game objects
-    debugMode = false;
+    debugMode   = false;
+    gameStarted = false;
     this.setFont(new Font("Courier New", Font.PLAIN, 14));
     this.setBackground(Color.BLACK);
     this.setFocusable(true);
@@ -62,6 +65,10 @@ public class GamePanel extends JPanel {
   
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
+    if (!gameStarted) {
+      drawStartScreen(g);
+      return;
+    }
     if (hero.isAlive() && !gameWon) {
       if (!gamePaused) {
         if (debugMode) {
@@ -81,6 +88,17 @@ public class GamePanel extends JPanel {
     } else if (gameWon) {
       displayGameWon(g);
     }
+  }
+  
+  /**
+   * Draws the initial screen for the user to begin the game
+   * @param g the graphics context to draw on
+   */
+  private void drawStartScreen(Graphics g) {
+    g.setColor(Color.white);
+    g.drawString("Space Invaders", MENU_X, MENU_Y - 80);
+    g.drawString("Use the arrow keys to move and the space bar to shoot.", MENU_X - 150, MENU_Y - 40);
+    g.drawString("Press any key to start the game.", MENU_X - 40, MENU_Y);
   }
   
 
@@ -239,6 +257,21 @@ public class GamePanel extends JPanel {
   public void updateScore() {
     score = (44 - wave.amountOfEnemiesAlive()) * 10;
   }
+  
+  /**
+   * Returns whether the game has started or not
+   * @return gameStarted
+   */
+  public boolean gameHasStarted() {
+    return gameStarted;
+  }
+  
+  /**
+   * Starts the game
+   */
+  public void startGame() {
+    gameStarted = true;
+  }
 
 }
 
@@ -261,6 +294,11 @@ class ShipListener implements KeyListener {
   }
 
   public void keyPressed(KeyEvent ke) {
+    // the user may press any button to start the game
+    if (!panel.gameHasStarted()) {
+      panel.startGame();
+      return;
+    }
     switch (ke.getKeyCode()) {
     case KeyEvent.VK_RIGHT: // move the ship to the right
       if (!panel.isPaused()) {
